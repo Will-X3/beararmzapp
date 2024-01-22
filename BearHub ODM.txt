@@ -1,0 +1,76 @@
+//BearHub ODM
+
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+  customer_ID: { type: String, required: true, unique: true },
+  // Other user-related fields can be added here
+});
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
+
+
+const mongoose = require('mongoose');
+
+const categorySchema = new mongoose.Schema({
+  category_ID: { type: String, required: true, unique: true },
+  categoryName: { type: String, required: true },
+});
+
+const Category = mongoose.model('Category', categorySchema);
+
+module.exports = Category;
+
+
+const mongoose = require('mongoose');
+
+const articleSchema = new mongoose.Schema({
+  article_ID: { type: String, required: true, unique: true },
+  category_ID: { type: mongoose.Schema.Types.String, ref: 'Category', required: true },
+  // Other article-related fields can be added here
+});
+
+const Article = mongoose.model('Article', articleSchema);
+
+module.exports = Article;
+
+
+const mongoose = require('mongoose');
+
+const newsVideoSchema = new mongoose.Schema({
+  video_ID: { type: String, required: true, unique: true },
+  category_ID: { type: mongoose.Schema.Types.String, ref: 'Category', required: true },
+  // Other news video-related fields can be added here
+});
+
+const NewsVideo = mongoose.model('NewsVideo', newsVideoSchema);
+
+module.exports = NewsVideo;
+
+
+const mongoose = require('mongoose');
+
+const trendingVideoSchema = new mongoose.Schema({
+  video_ID: { type: String, required: true, unique: true },
+  category_ID: { type: mongoose.Schema.Types.String, ref: 'Category', required: true },
+  // Other trending video-related fields can be added here
+});
+
+const TrendingVideo = mongoose.model('TrendingVideo', trendingVideoSchema);
+
+module.exports = TrendingVideo;
+
+
+const mongoose = require('mongoose');
+
+const trainingVideoSchema = new mongoose.Schema({
+  video_ID: { type: String, required: true, unique: true },
+  category_ID: { type: mongoose.Schema.Types.String, ref: 'Category', required: true },
+  // Other training video-related fields can be added here
+});
+
+const TrainingVideo = mongoose.model('TrainingVideo', trainingVideoSchema);
+
+module.exports = TrainingVideo;
