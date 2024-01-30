@@ -27,12 +27,16 @@ const articlesRoutes = require('./routes/articlesRoutes');
 const videosRoute = require('./routes/videosRoute');
 const reviewsRoute = require('./routes/reviewsRoute');
 const chatHistoryRoute = require('./routes/chatHistoryRoute');
+const userRoutes = require('./routes/userRoutes'); // Include user routes
+
 
 // Use routes
 app.use('/articles', articlesRoutes);
 app.use('/videos', videosRoute);
 app.use('/reviews', reviewsRoute);
 app.use('/chathistory', chatHistoryRoute);
+app.use('/users', userRoutes); // Use user routes
+
 
 // Default route
 app.get('/', (req, res) => {
