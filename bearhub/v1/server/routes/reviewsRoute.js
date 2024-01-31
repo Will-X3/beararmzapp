@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const reviewsController = require('../controllers/reviewsController');
+const Reviews = require('../models/Reviews'); // Import the Reviews model
 
 // All reviews routes
 router.get('/', async (req, res) => {
@@ -40,6 +41,22 @@ router.delete('/:reviewId', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error while deleting review.' });
+  }
+});
+
+router.get('/:reviewId', async (req, res) => {
+  const { reviewId } = req.params;
+
+  try {
+    const review = await Reviews.findById(reviewId);
+    if (!review) {
+      return res.status(404).json({ error: 'Review not found' });
+    }
+
+    res.json(review);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch the review' });
   }
 });
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const articlesController = require('../controllers/articlesController');
+const Article = require('../models/Article');
 
 // All article routes
 router.get('/', async (req, res) => {
@@ -43,6 +44,21 @@ router.delete('/:articleId', async (req, res) => {
   }
 });
 
-// Additional article-related routes as needed
+router.get('/:articleId', async (req, res) => {
+  const { articleId } = req.params;
+
+  try {
+    const article = await Article.findById(articleId);
+
+    if (!article) {
+      return res.status(404).json({ message: 'Article not found.' });
+    }
+
+    res.json(article);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error while fetching the article.' });
+  }
+});
 
 module.exports = router;

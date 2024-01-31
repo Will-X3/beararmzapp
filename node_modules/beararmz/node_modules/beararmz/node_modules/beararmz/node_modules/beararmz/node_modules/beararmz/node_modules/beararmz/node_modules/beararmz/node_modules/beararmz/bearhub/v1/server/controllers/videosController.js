@@ -11,10 +11,10 @@ const getAllVideos = async (req, res) => {
 };
 
 const createVideo = async (req, res) => {
-  const { title, url } = req.body;
+  const { title, url, description } = req.body;
 
   try {
-    const newVideo = new Video({ title, url });
+    const newVideo = new Video({ title, url, description });
     await newVideo.save();
     res.status(201).json(newVideo);
   } catch (error) {
@@ -25,12 +25,12 @@ const createVideo = async (req, res) => {
 
 const updateVideo = async (req, res) => {
   const { videoId } = req.params;
-  const { title, url } = req.body;
+  const { title, url, description } = req.body;
 
   try {
     const updatedVideo = await Video.findByIdAndUpdate(
       videoId,
-      { title, url },
+      { title, url, description },
       { new: true }
     );
 
@@ -55,10 +55,28 @@ const deleteVideo = async (req, res) => {
       return res.status(404).json({ error: 'Video not found' });
     }
 
-    res.json(deletedVideo);
+    // Respond with a message instead of the deleted video object
+    res.json({ message: 'Video deleted successfully' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+// Get a video by ID
+const getVideoById = async (req, res) => {
+  const { videoId } = req.params;
+  console.log('Video ID:', videoId);
+  try {
+    const video = await Video.findById(videoId);
+    if (!video) {
+      return res.status(404).json({ error: 'Video not found' });
+    }
+
+    res.json(video);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch the video' });
   }
 };
 
@@ -69,4 +87,5 @@ module.exports = {
   createVideo,
   updateVideo,
   deleteVideo,
+  getVideoById,
 };

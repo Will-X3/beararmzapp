@@ -3,7 +3,7 @@ const router = express.Router();
 const Category = require('../models/Category');
 
 // Route to get all categories
-router.get('/categories', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const categories = await Category.find();
     res.json(categories);
@@ -14,20 +14,16 @@ router.get('/categories', async (req, res) => {
 });
 
 // Route to create a new category
-router.post('/categories', async (req, res) => {
+router.post('/', async (req, res) => {
   const { name, description } = req.body;
-
   try {
     if (!name) {
       return res.status(400).json({ message: 'Category name is required.' });
     }
-
     const existingCategory = await Category.findOne({ name });
-
     if (existingCategory) {
       return res.status(400).json({ message: 'Category with the same name already exists.' });
     }
-
     const newCategory = await Category.create({ name, description });
     res.status(201).json(newCategory);
   } catch (error) {
@@ -36,6 +32,63 @@ router.post('/categories', async (req, res) => {
   }
 });
 
-// Add routes for updating and deleting categories as needed
+// Route to update a category
+router.put('/:categoryId', async (req, res) => {
+  const { name, description } = req.body;
+  const { categoryId } = req.params;
+
+  try {
+    const updatedCategory = await Category.findByIdAndUpdate(
+      categoryId,
+      { name, description },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedCategory) {
+      return res.status(404).json({ message: 'Category not found.' });
+    }
+
+    res.json(updatedCategory);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error while updating the category.' });
+  }
+});
+
+// Route to delete a category
+router.delete('/:categoryId', async (req, res) => {
+  const { categoryId } = req.params;
+
+  try {
+    const deletedCategory = await Category.findByIdAndDelete(categoryId);
+
+    if (!deletedCategory) {
+      return res.status(404).json({ message: 'Category not found.' });
+    }
+
+    res.json({ message: 'Category deleted successfully.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error while deleting the category.' });
+  }
+});
+
+// Route to get a specific category by ID
+router.get('/:categoryId', async (req, res) => {
+    const { categoryId } = req.params;
+  
+    try {
+      const category = await Category.findById(categoryId);
+  
+      if (!category) {
+        return res.status(404).json({ message: 'Category not found.' });
+      }
+  
+      res.json(category);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error while fetching the category.' });
+    }
+  });
 
 module.exports = router;

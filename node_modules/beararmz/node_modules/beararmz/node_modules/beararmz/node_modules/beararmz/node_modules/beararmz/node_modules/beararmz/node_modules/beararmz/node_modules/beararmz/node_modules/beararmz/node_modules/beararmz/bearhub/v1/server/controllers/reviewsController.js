@@ -3,10 +3,10 @@ const Reviews = require('../models/Reviews');
 const getAllReviews = async (req, res) => {
   try {
     const reviews = await Reviews.find();
-    return res.json(reviews);
+    res.json(reviews);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Internal server error while fetching reviews.' });
+    res.status(500).json({ error: 'Failed to retrieve reviews' });
   }
 };
 
@@ -14,12 +14,17 @@ const createReview = async (req, res) => {
   const { reviewer, comment, rating } = req.body;
 
   try {
+    // Basic input validation
+    if (!reviewer || !comment || !rating) {
+      return res.status(400).json({ error: 'Reviewer, comment, and rating are required.' });
+    }
+
     const newReview = new Reviews({ reviewer, comment, rating });
     await newReview.save();
     return res.status(201).json(newReview);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Internal server error while creating a new review.' });
+    return res.status(500).json({ error: 'Failed to create a new review' });
   }
 };
 
@@ -35,13 +40,13 @@ const updateReview = async (req, res) => {
     );
 
     if (!updatedReview) {
-      return res.status(404).json({ message: 'Review not found.' });
+      return res.status(404).json({ error: 'Review not found' });
     }
 
     return res.json(updatedReview);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Internal server error while updating the review.' });
+    return res.status(500).json({ error: 'Failed to update the review' });
   }
 };
 
@@ -52,13 +57,13 @@ const deleteReview = async (req, res) => {
     const deletedReview = await Reviews.findByIdAndDelete(reviewId);
 
     if (!deletedReview) {
-      return res.status(404).json({ message: 'Review not found.' });
+      return res.status(404).json({ error: 'Review not found' });
     }
 
-    return res.json({ message: 'Review deleted successfully.' });
+    return res.json({ message: 'Review deleted successfully' });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Internal server error while deleting the review.' });
+    return res.status(500).json({ error: 'Failed to delete the review' });
   }
 };
 

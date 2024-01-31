@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const videosController = require('../controllers/videosController');
+const Video = require('../models/Video');
+
 
 // All video routes
 router.get('/', async (req, res) => {
@@ -43,6 +45,19 @@ router.delete('/:videoId', async (req, res) => {
   }
 });
 
-// Additional video-related routes as needed
-
+router.get('/:videoId', async (req, res) => {
+    const { videoId } = req.params;
+  
+    try {
+      const video = await Video.findById(videoId);
+      if (!video) {
+        return res.status(404).json({ error: 'Video not found' });
+      }
+  
+      res.json(video);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to fetch the video' });
+    }
+  });
 module.exports = router;

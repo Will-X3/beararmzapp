@@ -4,7 +4,7 @@ const cors = require('cors');
 const { errorHandler } = require('./middleware/errorHandler'); // Import the errorHandler
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 mongoose.connect('mongodb://localhost:27017/bearhub', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
@@ -27,17 +27,17 @@ app.use(errorHandler);
 const articlesRoutes = require('./routes/articlesRoutes');
 const videosRoute = require('./routes/videosRoute');
 const reviewsRoute = require('./routes/reviewsRoute');
-const chatHistoryRoute = require('./routes/chatHistoryRoute');
-const userRoute = require('./routes/userRoute');
-const categoryRoute = require('./routes/categoryRoute'); // Include user routes
+const userRoute = require('./routes/userRoute'); 
+const categoryRoute = require('./routes/categoryRoute');
+const commentRoute = require('./routes/commentRoute'); 
 
 // Use routes
 app.use('/v1/bearhub/articles', articlesRoutes);
 app.use('/v1/bearhub/videos', videosRoute);
 app.use('/v1/bearhub/reviews', reviewsRoute);
-app.use('/v1/bearhub/chat-history', chatHistoryRoute);
 app.use('/v1/bearhub/users', userRoute);
-app.use('/v1/bearhub/category', categoryRoute); // Use user routes
+app.use('/v1/bearhub/categories', categoryRoute);
+app.use('/v1/bearhub/comment', commentRoute);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
