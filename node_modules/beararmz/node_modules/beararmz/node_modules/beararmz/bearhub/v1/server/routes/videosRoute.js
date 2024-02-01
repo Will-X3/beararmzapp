@@ -35,15 +35,24 @@ router.put('/:videoId', async (req, res) => {
   }
 });
 
+// Route to delete a video
 router.delete('/:videoId', async (req, res) => {
-  try {
-    await videosController.deleteVideo(req, res);
-    res.json({ message: 'Video deleted successfully.' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error while deleting video.' });
-  }
-});
+    try {
+      const { videoId } = req.params;
+      const deletedVideo = await Video.findByIdAndDelete(videoId);
+  
+      if (!deletedVideo) {
+        return res.status(404).json({ error: 'Video not found' });
+      }
+  
+      res.json({ message: 'Video deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
+  
 
 router.get('/:videoId', async (req, res) => {
     const { videoId } = req.params;

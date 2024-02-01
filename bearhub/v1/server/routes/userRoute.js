@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const User = require('../models/User');
+const Comment = require('../models/Comment');
+
 
 // All user routes
 router.get('/', async (req, res) => {
@@ -36,17 +38,26 @@ router.put('/:userId', async (req, res) => {
   }
 });
 
+// Route to delete a user
 router.delete('/:userId', async (req, res) => {
-    const { userId } = req.params;
-  
     try {
-      await userController.deleteUser(req, res);
-      res.json({ message: 'User deleted successfully.' });
+      const { userId } = req.params;
+      const user = await User.findById(userId);
+  
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      await Comment.deleteMany({ user: userId });
+      await user.deleteOne();
+  
+      res.json({ message: 'User deleted successfully' });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Internal server error.' });
+      res.status(500).json({ message: 'Failed to delete user' });
     }
   });
+  
   
   
 

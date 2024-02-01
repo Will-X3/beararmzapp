@@ -1,8 +1,10 @@
+// routes/commentRoutes.js
 const express = require('express');
 const router = express.Router();
 const commentController = require('../controllers/commentController');
+const Comment = require('../models/Comment');
 
-// Get all comments
+
 router.get('/', async (req, res) => {
   try {
     await commentController.getAllComments(req, res);
@@ -12,7 +14,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Create a new comment
 router.post('/', async (req, res) => {
   try {
     await commentController.createComment(req, res);
@@ -22,7 +23,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Update a comment
 router.put('/:commentId', async (req, res) => {
   try {
     await commentController.updateComment(req, res);
@@ -32,7 +32,6 @@ router.put('/:commentId', async (req, res) => {
   }
 });
 
-// Delete a comment by ID
 router.delete('/:commentId', async (req, res) => {
   try {
     await commentController.deleteComment(req, res);
@@ -42,13 +41,13 @@ router.delete('/:commentId', async (req, res) => {
   }
 });
 
-// Get a comment by ID
 router.get('/:commentId', async (req, res) => {
-    try {
-      await commentController.getCommentById(req, res);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal server error while fetching comment.' });
-    }
-  });
+  try {
+    await commentController.getCommentById(req, res);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error while fetching comment.' });
+  }
+});
+
 module.exports = router;

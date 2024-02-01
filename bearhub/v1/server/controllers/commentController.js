@@ -1,13 +1,13 @@
+// controllers/commentController.js
 const Comment = require('../models/Comment');
-const mongoose = require('mongoose');
 
 const getAllComments = async (req, res) => {
   try {
     const comments = await Comment.find();
-    res.status(200).json(comments);
+    res.json(comments);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ message: 'Internal server error while fetching comments.' });
   }
 };
 
@@ -15,38 +15,40 @@ const createComment = async (req, res) => {
     const { content } = req.body;
   
     try {
+      // Basic input validation
+      if (!content) {
+        return res.status(400).json({ message: 'Content is required.' });
+      }
+  
       const newComment = new Comment({ content });
       await newComment.save();
       res.status(201).json(newComment);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ message: 'Failed to create comment.' });
     }
   };
   
 
-  
-  
-
 const updateComment = async (req, res) => {
   const { commentId } = req.params;
-  const { content } = req.body;
+  const { text } = req.body;
 
   try {
-    const updatedComment = await Comment.findByIdAndUpdate(
-      commentId,
-      { content },
-      { new: true }
-    );
+    const comment = await Comment.findById(commentId);
 
-    if (!updatedComment) {
-      return res.status(404).json({ error: 'Comment not found' });
+    if (!comment) {
+      return res.status(404).json({ message: 'Comment not found' });
     }
 
-    res.json(updatedComment);
+    // Update comment field
+    comment.text = text || comment.text;
+
+    await comment.save();
+    res.json(comment);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ message: 'Failed to update comment.' });
   }
 };
 
@@ -57,33 +59,33 @@ const deleteComment = async (req, res) => {
     const deletedComment = await Comment.findByIdAndDelete(commentId);
 
     if (!deletedComment) {
-      return res.status(404).json({ error: 'Comment not found' });
+      return res.status(404).json({ message: 'Comment not found' });
     }
 
-    res.json(deletedComment);
+    // Respond with a success message
+    res.json({ message: 'Comment deleted successfully' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
 const getCommentById = async (req, res) => {
-    const { commentId } = req.params;
-  
-    try {
-      const comment = await Comment.findById(commentId);
-  
-      if (!comment) {
-        return res.status(404).json({ error: 'Comment not found' });
-      }
-  
-      res.status(200).json(comment);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  };
+  const { commentId } = req.params;
 
+  try {
+    const comment = await Comment.findById(commentId);
+
+    if (!comment) {
+      return res.status(404).json({ message: 'Comment not found' });
+    }
+
+    res.json(comment);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to fetch comment.' });
+  }
+};
 
 module.exports = {
   getAllComments,

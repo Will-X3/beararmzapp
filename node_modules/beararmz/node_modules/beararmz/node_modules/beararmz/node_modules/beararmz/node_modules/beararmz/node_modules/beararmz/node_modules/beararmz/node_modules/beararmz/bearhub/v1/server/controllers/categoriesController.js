@@ -71,10 +71,26 @@ const deleteCategory = async (req, res) => {
     return res.status(500).json({ error: 'Internal server error while deleting the category.' });
   }
 };
+const getCategoryById = async (req, res) => {
+    try {
+      const categoryId = req.params.categoryId;
+      const category = await Category.findById(categoryId);
+  
+      if (!category) {
+        return res.status(404).json({ error: 'Category not found.' });
+      }
+  
+      return res.json(category);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Internal server error while fetching the category.' });
+    }
+  };
 
 module.exports = {
   getAllCategories,
   createCategory,
   updateCategory,
   deleteCategory,
+  getCategoryById,
 };

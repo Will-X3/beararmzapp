@@ -34,15 +34,24 @@ router.put('/:articleId', async (req, res) => {
   }
 });
 
+// Route to delete an article
 router.delete('/:articleId', async (req, res) => {
-  try {
-    await articlesController.deleteArticle(req, res);
-    res.json({ message: 'Article deleted successfully.' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error.' });
-  }
-});
+    const { articleId } = req.params;
+  
+    try {
+      const deletedArticle = await Article.findByIdAndDelete(articleId);
+  
+      if (!deletedArticle) {
+        return res.status(404).json({ message: 'Article not found.' });
+      }
+  
+      res.json({ message: 'Article deleted successfully.' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error while deleting the article.' });
+    }
+  });
+  
 
 router.get('/:articleId', async (req, res) => {
   const { articleId } = req.params;
