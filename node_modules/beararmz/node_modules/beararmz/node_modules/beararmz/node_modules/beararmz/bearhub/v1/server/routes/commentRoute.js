@@ -42,6 +42,13 @@ router.delete('/:commentId', async (req, res) => {
   }
 });
 
-// Additional actions as needed
-
+// Get a comment by ID
+router.get('/:commentId', async (req, res) => {
+    try {
+      await commentController.getCommentById(req, res);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error while fetching comment.' });
+    }
+  });
 module.exports = router;

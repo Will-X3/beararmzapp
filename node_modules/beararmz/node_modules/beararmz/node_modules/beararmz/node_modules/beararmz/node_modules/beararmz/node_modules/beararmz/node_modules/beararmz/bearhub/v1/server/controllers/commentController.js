@@ -67,11 +67,28 @@ const deleteComment = async (req, res) => {
   }
 };
 
-// Additional comment-related operations as needed
+const getCommentById = async (req, res) => {
+    const { commentId } = req.params;
+  
+    try {
+      const comment = await Comment.findById(commentId);
+  
+      if (!comment) {
+        return res.status(404).json({ error: 'Comment not found' });
+      }
+  
+      res.status(200).json(comment);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+
 
 module.exports = {
   getAllComments,
   createComment,
   updateComment,
   deleteComment,
+  getCommentById,
 };

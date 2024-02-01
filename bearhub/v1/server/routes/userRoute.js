@@ -37,33 +37,28 @@ router.put('/:userId', async (req, res) => {
 });
 
 router.delete('/:userId', async (req, res) => {
-  const { userId } = req.params;
-
-  try {
-    await userController.deleteUser(req, res);
-    res.json({ message: 'User deleted successfully.' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error.' });
-  }
-});
+    const { userId } = req.params;
+  
+    try {
+      await userController.deleteUser(req, res);
+      res.json({ message: 'User deleted successfully.' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error.' });
+    }
+  });
+  
+  
 
 router.get('/:userId', async (req, res) => {
-  const { userId } = req.params;
-
-  try {
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.status(404).json({ message: 'User not found.' });
+    try {
+      const user = await userController.getUserById(req, res);
+      res.json(user);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error while fetching the user.' });
     }
-
-    res.json(user);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error while fetching the user.' });
-  }
-});
+  });
 
 // Additional user-related routes as needed
 
