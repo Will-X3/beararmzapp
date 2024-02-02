@@ -3,7 +3,7 @@ const Article = require('../models/Article');
 const getAllArticles = async (req, res) => {
   try {
     const articles = await Article.find();
-    res.json(articles);
+    return res.json(articles);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });

@@ -4,7 +4,7 @@ const Comment = require('../models/Comment');
 const getAllComments = async (req, res) => {
   try {
     const comments = await Comment.find();
-    res.json(comments);
+    return comments;
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error while fetching comments.' });

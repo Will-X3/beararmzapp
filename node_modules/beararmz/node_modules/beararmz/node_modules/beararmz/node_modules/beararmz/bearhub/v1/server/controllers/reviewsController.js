@@ -3,10 +3,10 @@ const Reviews = require('../models/Reviews');
 const getAllReviews = async (req, res) => {
   try {
     const reviews = await Reviews.find();
-    res.json(reviews);
+    return reviews;
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to retrieve reviews' });
+    return res.status(500).json({ error: 'Failed to retrieve reviews' });
   }
 };
 
@@ -21,7 +21,7 @@ const createReview = async (req, res) => {
 
     const newReview = new Reviews({ reviewer, comment, rating });
     await newReview.save();
-    return res.status(201).json(newReview);
+    res.status(201).json(newReview);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Failed to create a new review' });

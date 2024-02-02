@@ -3,7 +3,7 @@ const Category = require('../models/Category');
 const getAllCategories = async (req, res) => {
   try {
     const categories = await Category.find();
-    return res.json(categories);
+    return categories;
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Internal server error while fetching categories.' });
