@@ -1,14 +1,14 @@
 const Video = require('../models/Video');
 
 const getAllVideos = async (req, res) => {
-  try {
-    const videos = await Video.find();
-    res.json(videos);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-};
+    try {
+      const videos = await Video.find();
+      return videos; // Return the videos instead of sending the response directly
+    } catch (error) {
+      console.error(error);
+      throw new Error('Error while fetching videos.'); // Throw the error to be caught in the route
+    }
+  };
 
 const createVideo = async (req, res) => {
   const { title, url, description } = req.body;

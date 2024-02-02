@@ -4,7 +4,7 @@ const categorySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true, // Ensures that category names are unique
+    unique: true, 
   },
   description: String, // An optional field for category description
   articles: [{
