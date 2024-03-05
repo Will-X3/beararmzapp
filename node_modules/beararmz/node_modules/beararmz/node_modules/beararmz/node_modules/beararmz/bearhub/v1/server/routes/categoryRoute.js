@@ -3,7 +3,7 @@ const router = express.Router();
 const Category = require('../models/Category');
 
 // Route to get all categories
-router.get('/', async (req, res) => {
+router.get('/v1/bearhub/categories', async (req, res) => {
   try {
     const categories = await Category.find();
     res.json(categories);
@@ -74,17 +74,17 @@ router.delete('/:categoryId', async (req, res) => {
 });
 
 // Route to get a specific category by ID
-router.get('/:categoryId', async (req, res) => {
-    const { categoryId } = req.params;
+router.get('/category/:category', async (req, res) => {
+    const { category } = req.params;
   
     try {
-      const category = await Category.findById(categoryId);
+      const foundCategory = await Category.findOne({ name: category });
   
-      if (!category) {
+      if (!foundCategory) {
         return res.status(404).json({ message: 'Category not found.' });
       }
   
-      res.json(category);
+      res.json(foundCategory);
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal server error while fetching the category.' });

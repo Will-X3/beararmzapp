@@ -3,11 +3,14 @@ const router = express.Router();
 const articlesController = require('../controllers/articlesController');
 const Article = require('../models/Article');
 
-// All article routes
+
+router.get('/article/:category', articlesController.getArticlesByCategory);
+
+//  Get All article routes
 router.get('/', async (req, res) => {
   try {
     const articles = await articlesController.getAllArticles(req, res);
-    res.json(articles);
+    return articles;
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error.' });

@@ -7,6 +7,7 @@ import LawsByState from "./pages/laws/LawsByState";
 import SpotlightNews from "../src/pages/news/SpotlightNews";
 import CampaignsPage from "../src/pages/news/CampaignsPage";
 import StoriesPage from "../src/pages/news/StoriesPage";
+import LegalUpdatesPage from "../src/pages/laws/LegalUpdates";
 
 const App = () => {
   const location = useLocation();
@@ -14,25 +15,21 @@ const App = () => {
 
   useEffect(() => {
     const path = location.pathname;
-    if (path.startsWith("/laws")) {
-      setCurrentPage("laws");
-    } else if (path.startsWith("/news")) {
-      setCurrentPage("news");
-    } else if (path.startsWith("/self-defense")) {
-      setCurrentPage("self-defense");
-    } else if (path.startsWith("/firearms")) {
-      setCurrentPage("firearms");
-    } else if (path.startsWith("/dictionary")) {
-      setCurrentPage("dictionary");
-    } else if (path.startsWith("/emergency")) {
-      setCurrentPage("emergency");
-    } else {
-      setCurrentPage("videos");
-    }
+    setCurrentPage(getPageFromPath(path));
   }, [location]);
 
   const handlePageToggle = () => {
     setCurrentPage((prevPage) => (prevPage === "videos" ? "articles" : "videos"));
+  };
+
+  const getPageFromPath = (path) => {
+    if (path.startsWith("/laws")) return "laws";
+    if (path.startsWith("/campaigns")) return "campaigns";
+    if (path.startsWith("/self-defense")) return "self-defense";
+    if (path.startsWith("/firearms")) return "firearms";
+    if (path.startsWith("/dictionary")) return "dictionary";
+    if (path.startsWith("/emergency")) return "emergency";
+    return "videos";
   };
 
   return (
@@ -41,22 +38,12 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route exact path="/laws-by-state" component={LawsByState} />
-          <Route exact path="/news" component={SpotlightNews} />
-          <Route
-            exact
-            path="/news/spotlight-news"
-            render={(props) => <SpotlightNews {...props} currentPage={currentPage} />}
-          />
-          <Route
-            exact
-            path="/news/campaigns"
-            render={(props) => <CampaignsPage {...props} currentPage={currentPage} />}
-          />
-          <Route
-            exact
-            path="/news/stories"
-            render={(props) => <StoriesPage {...props} currentPage={currentPage} />}
-          />
+          <Route exact path="/laws-by-state/laws-by-state" component={LawsByState} />
+          <Route exact path="/laws-by-state/legal-updates" component={LegalUpdatesPage} />
+          <Route exact path="/news/campaigns" component={CampaignsPage} />
+          <Route exact path="/news/stories" component={StoriesPage} />
+          <Route exact path="/news/spotlight-news" component={SpotlightNews} />
+          <Route exact path="/trending-articles" component={TrendingArticlesPage} />
           <Route path="/">
             {currentPage === "videos" ? (
               <TrendingVideosPage currentPage={currentPage} onPageToggle={handlePageToggle} />
@@ -65,7 +52,8 @@ const App = () => {
             )}
           </Route>
         </Switch>
-        <footer>{/* Footer contents */}</footer>
+        {/* Footer contents */}
+        <footer></footer>
       </div>
     </Router>
   );

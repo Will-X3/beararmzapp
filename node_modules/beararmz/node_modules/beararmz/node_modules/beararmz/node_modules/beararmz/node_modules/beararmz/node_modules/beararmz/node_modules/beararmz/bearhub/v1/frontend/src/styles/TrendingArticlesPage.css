@@ -1,0 +1,10 @@
+.trending-articles-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.article-list {
+  margin-top: 100px;
+  width: 80%; 
+}

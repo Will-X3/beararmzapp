@@ -1,0 +1,53 @@
+/* Slider container */
+.slider-container {
+  position: relative;
+  height: 160px;
+  width: 40%; /* Adjust the width as needed */
+  margin: 100px auto 5%; /* Center horizontally and add 100px top margin */
+  padding-left: 120px; /* Add left padding to create space for the arrow */
+}
+
+/* Left and Right arrows */
+.prev-arrow,
+.next-arrow {
+  position: absolute;
+  bottom: -60px; /* Adjust the distance from the bottom as needed */
+  font-size: 45px;
+  color: #000000;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.prev-arrow {
+  left: 40px; /* Adjust the distance from the left as needed */
+}
+
+.next-arrow {
+  right: 40px; /* Adjust the distance from the right as needed */
+}
+
+/* Slides */
+.slide {
+  width: 160px; /* Set a fixed width for each slide */
+  height: 160px; /* Set a fixed height for each slide */
+  border-radius: 50%; /* Modified border-radius for circle shape */
+  background-size: cover;
+  background-position: center;
+  overflow: hidden; /* Hide any content that overflows the slide */
+  margin-right: 10px; /* Move the slides to the left by adding margin */
+}
+
+/* If you want to apply a background image to the slides */
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+
+/* Dots container */
+.dots-container {
+  margin-left: 100px;
+  left: 70%;
+  transform: translateX(-50%);
+}

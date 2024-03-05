@@ -1,0 +1,54 @@
+/* styles/Drawer.css */
+.drawer {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease-in-out;
+  }
+  
+  .drawer.open {
+    right: 0;
+  }
+  
+  .drawer-header {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .close-button:focus {
+    outline: none;
+  }
+  
+  .drawer-content {
+    padding: 20px;
+  }
+  
+  .drawer ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .drawer ul li {
+    margin-bottom: 10px;
+  }
+  
+  .drawer ul li a {
+    color: #333333;
+    text-decoration: none;
+  }
+  
+  .drawer ul li a:hover {
+    color: #000000;
+  }
+  

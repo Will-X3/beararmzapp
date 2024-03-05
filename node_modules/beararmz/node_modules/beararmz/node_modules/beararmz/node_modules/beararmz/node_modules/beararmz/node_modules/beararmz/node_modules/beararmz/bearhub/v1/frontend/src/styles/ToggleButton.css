@@ -1,0 +1,33 @@
+.toggle-button {
+  margin-top: 250px;
+  display: inline-block;
+  padding: 8px 60px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+
+.toggle-button.videos {
+  padding-right: 10px;
+  background-color: #007bff;
+  color: #fff;
+}
+
+.toggle-button.articles {
+  padding-left: 10px;
+  background-color: #28a745;
+  color: #fff;
+}
+
+.indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 20px;
+  transition: left 0.3s ease-in-out;
+}

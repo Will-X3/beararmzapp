@@ -14,7 +14,7 @@ const createArticle = async (req, res) => {
   const { title, content } = req.body;
 
   try {
-    const newArticle = new Article({ title, content });
+    const newArticle = new Article({ title, content, category: req.body.category });
     await newArticle.save();
     res.status(201).json(newArticle);
   } catch (error) {
@@ -62,11 +62,28 @@ const deleteArticle = async (req, res) => {
   }
 };
 
-// Additional article-related operations as needed
+const getArticlesByCategory = async (req, res) => {
+    const { category } = req.params;
+  
+    try {
+      // Fetch articles by category name (case-insensitive)
+      const articles = await Article.find({ category: { $regex: new RegExp(category, 'i') } });
+  
+      if (!articles || articles.length === 0) {
+        return res.status(404).json({ error: 'No articles found for the specified category' });
+      }
+  
+      res.json(articles);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error while fetching articles by category name.' });
+    }
+  };
 
 module.exports = {
   getAllArticles,
   createArticle,
   updateArticle,
   deleteArticle,
+  getArticlesByCategory,
 };

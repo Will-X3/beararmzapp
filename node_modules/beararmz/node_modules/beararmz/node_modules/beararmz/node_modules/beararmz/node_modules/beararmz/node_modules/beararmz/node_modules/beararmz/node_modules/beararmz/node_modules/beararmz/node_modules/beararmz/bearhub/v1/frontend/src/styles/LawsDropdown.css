@@ -1,0 +1,33 @@
+/* src/styles/LawsDropdown.css */
+
+/* Container styles */
+.LawsDropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  /* Dropdown styles */
+  .LawsDropdown select {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+  }
+  
+  .LawsDropdown select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  /* Heading styles */
+  .LawsDropdown h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  

@@ -1,0 +1,41 @@
+/* LawsByState.css */
+.laws-by-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.laws-dropdown-container {
+  margin-bottom: 20px;
+}
+
+.dropdown-heading {
+  margin-bottom: 5px;
+}
+.body-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.law-details-container {
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  text-align: left;
+}
+
+.law-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.law-description {
+  margin-bottom: 10px;
+}
+
+.state-description {
+  font-style: italic;
+}

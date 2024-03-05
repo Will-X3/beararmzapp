@@ -3,6 +3,8 @@ const router = express.Router();
 const videosController = require('../controllers/videosController');
 const Video = require('../models/Video');
 
+// Route to get videos by category
+router.get('/videos/:category', videosController.getVideosByCategory);
 
 // All video routes
 router.get('/', async (req, res) => {
@@ -37,36 +39,35 @@ router.put('/:videoId', async (req, res) => {
 
 // Route to delete a video
 router.delete('/:videoId', async (req, res) => {
-    try {
-      const { videoId } = req.params;
-      const deletedVideo = await Video.findByIdAndDelete(videoId);
-  
-      if (!deletedVideo) {
-        return res.status(404).json({ error: 'Video not found' });
-      }
-  
-      res.json({ message: 'Video deleted successfully' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
+  try {
+    const { videoId } = req.params;
+    const deletedVideo = await Video.findByIdAndDelete(videoId);
+
+    if (!deletedVideo) {
+      return res.status(404).json({ error: 'Video not found' });
     }
-  });
-  
-  
+
+    res.json({ message: 'Video deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 router.get('/:videoId', async (req, res) => {
-    const { videoId } = req.params;
-  
-    try {
-      const video = await Video.findById(videoId);
-      if (!video) {
-        return res.status(404).json({ error: 'Video not found' });
-      }
-  
-      res.json(video);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Failed to fetch the video' });
+  const { videoId } = req.params;
+
+  try {
+    const video = await Video.findById(videoId);
+    if (!video) {
+      return res.status(404).json({ error: 'Video not found' });
     }
-  });
+
+    res.json(video);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch the video' });
+  }
+});
+
 module.exports = router;

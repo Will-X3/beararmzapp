@@ -1,0 +1,74 @@
+/* LegalCard.css */
+
+.legal-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .legal-card.fullscreen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    width: 80%;
+    height: 80%;
+    max-width: 800px;
+    max-height: 600px;
+  }
+  
+  .legal-card-header {
+    position: relative;
+    padding: 20px;
+    background-color: #f1f1f1;
+  }
+  
+  .legal-card-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .legal-card-header img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+  }
+  
+  .exit-fullscreen {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: transparent;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .legal-card-body {
+    padding: 20px;
+  }
+  
+  .legal-card-body p {
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .read-more {
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .read-more:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Add any additional styles as needed */
+  

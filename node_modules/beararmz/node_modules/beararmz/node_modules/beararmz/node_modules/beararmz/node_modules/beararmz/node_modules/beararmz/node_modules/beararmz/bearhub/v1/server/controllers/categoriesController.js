@@ -37,6 +37,7 @@ const updateCategory = async (req, res) => {
 
   try {
     const categoryId = req.params.categoryId;
+    
 
     const updatedCategory = await Category.findByIdAndUpdate(
       categoryId,
@@ -71,19 +72,21 @@ const deleteCategory = async (req, res) => {
     return res.status(500).json({ error: 'Internal server error while deleting the category.' });
   }
 };
-const getCategoryById = async (req, res) => {
-    try {
-      const categoryId = req.params.categoryId;
-      const category = await Category.findById(categoryId);
+const getCategoryByName = async (req, res) => {
+    const { category } = req.params;
   
-      if (!category) {
-        return res.status(404).json({ error: 'Category not found.' });
+    try {
+      // Fetch category by name (case-insensitive)
+      const foundCategory = await Category.findOne({ name: { $regex: new RegExp(category, 'i') } });
+  
+      if (!foundCategory) {
+        return res.status(404).json({ error: 'Category not found' });
       }
   
-      return res.json(category);
+      res.json(foundCategory);
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ error: 'Internal server error while fetching the category.' });
+      res.status(500).json({ error: 'Internal server error while fetching category by name.' });
     }
   };
 
@@ -92,5 +95,5 @@ module.exports = {
   createCategory,
   updateCategory,
   deleteCategory,
-  getCategoryById,
+  getCategoryByName,
 };

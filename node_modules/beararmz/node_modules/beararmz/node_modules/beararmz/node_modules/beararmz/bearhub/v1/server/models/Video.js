@@ -13,7 +13,7 @@ const videoSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  // You can add more fields as needed for your specific use case
+  category: String,
 });
 
 const Video = mongoose.model('Video', videoSchema);

@@ -1,20 +1,21 @@
 const Video = require('../models/Video');
 
-const getAllVideos = async (req, res) => {
-    try {
-      const videos = await Video.find();
-      return videos; // Return the videos instead of sending the response directly
-    } catch (error) {
-      console.error(error);
-      throw new Error('Error while fetching videos.'); // Throw the error to be caught in the route
-    }
-  };
+const getAllVideos = async () => {
+  try {
+    const videos = await Video.find();
+    return videos; // Return the videos
+  } catch (error) {
+    console.error(error);
+    throw new Error('Error while fetching videos.');
+  }
+};
+
 
 const createVideo = async (req, res) => {
   const { title, url, description } = req.body;
 
   try {
-    const newVideo = new Video({ title, url, description });
+    const newVideo = new Video({ title, url, description, category: req.body.category });
     await newVideo.save();
     res.status(201).json(newVideo);
   } catch (error) {
@@ -80,6 +81,24 @@ const getVideoById = async (req, res) => {
   }
 };
 
+const getVideosByCategory = async (req, res) => {
+    const { category } = req.params;
+  
+    try {
+      // Fetch videos by category name (case-insensitive)
+      const videos = await Video.find({ category: { $regex: new RegExp(category, 'i') } });
+  
+      if (!videos || videos.length === 0) {
+        return res.status(404).json({ error: 'No videos found for the specified category' });
+      }
+  
+      res.json(videos);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error while fetching videos by category name.' });
+    }
+  };
+
 // Additional video-related operations as needed
 
 module.exports = {
@@ -88,4 +107,5 @@ module.exports = {
   updateVideo,
   deleteVideo,
   getVideoById,
+  getVideosByCategory,
 };

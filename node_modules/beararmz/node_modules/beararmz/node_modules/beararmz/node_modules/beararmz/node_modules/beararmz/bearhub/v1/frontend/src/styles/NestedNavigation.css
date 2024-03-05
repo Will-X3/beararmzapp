@@ -1,0 +1,51 @@
+/* NestedNavigation.css */
+
+.nested-navigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Adjust as needed */
+}
+
+.nested-navigation ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  position: relative; /* Set parent container position to relative */
+}
+
+.nested-navigation li {
+  margin: 0 10px; /* Adjust spacing between items as needed */
+}
+
+.nested-navigation a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 18px;
+  position: relative; /* Set position to relative for parent links */
+}
+
+.nested-navigation .active a {
+  text-decoration: underline; /* Underline for active links */
+}
+
+/* Add styling for subcategories */
+.subcategories {
+  position: absolute; /* Position subcategories relative to parent container */
+  top: 0%; /* Position subcategories below parent container */
+  left: -60%; /* Center subcategories horizontally */
+}
+
+.subcategories li {
+  margin: 10px 10px; /* Adjust spacing between subcategories */
+}
+
+.subcategories a {
+  color: #333; /* Text color for subcategories */
+  position: relative; /* Set position to relative for subcategory links */
+}
+
+.subcategories .active a {
+  text-decoration: underline; /* Underline for active subcategory links */
+}

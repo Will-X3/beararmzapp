@@ -1,0 +1,16 @@
+/* SpotlightNews.css */
+
+.spotlight-news {
+    padding: 20px;
+  }
+  
+  .spotlight-news h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .spotlight-news p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  

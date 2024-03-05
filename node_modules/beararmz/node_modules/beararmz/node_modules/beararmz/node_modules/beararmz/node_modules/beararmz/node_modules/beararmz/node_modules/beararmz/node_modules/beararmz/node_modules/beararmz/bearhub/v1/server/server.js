@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const { errorHandler } = require('./middleware/errorHandler'); // Import the errorHandler
+const {errorHandler} = require('../server/middleware/errorHandler');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -18,10 +18,15 @@ db.on('error', (err) => {
 });
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(errorHandler);
+
 
 // Routes
 const articlesRoutes = require('./routes/articlesRoutes');
@@ -39,11 +44,7 @@ app.use('/v1/bearhub/users', userRoute);
 app.use('/v1/bearhub/categories', categoryRoute);
 app.use('/v1/bearhub/comment', commentRoute);
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Internal Server Error' });
-});
+
 
 // Start server
 app.listen(PORT, () => {

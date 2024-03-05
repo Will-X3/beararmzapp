@@ -1,0 +1,11 @@
+.trending-videos-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.video-list {
+  margin-top: 100px;
+  width: 80%; 
+}
+
