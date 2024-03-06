@@ -10,8 +10,7 @@ const TrendingArticlesPage = ({ onPageToggle }) => {
   const [articles, setArticles] = useState([]);
   const [filteredArticles, setFilteredArticles] = useState([]);
   const [searchInput, setSearchInput] = useState('');
-  const [currentPage, setCurrentPage] = useState('articles'); // Manage current page state
-
+  const [currentPage, setCurrentPage] = useState('articles'); 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
@@ -40,18 +39,18 @@ const TrendingArticlesPage = ({ onPageToggle }) => {
     setSearchInput(input);
   };
 
-  const handlePageToggle = () => {
-    const targetPage = currentPage === 'videos' ? 'articles' : 'videos';
-    setCurrentPage(targetPage); // Update current page state
-    onPageToggle(targetPage);
-  };
+  // const handlePageToggle = () => {
+  //   const targetPage = currentPage === 'videos' ? 'articles' : 'videos';
+  //   setCurrentPage(targetPage); 
+  //   onPageToggle(targetPage);
+  // };
 
   return (
     <div className="trending-articles-page">
       <NestedNavigation currentPage={currentPage} onPageChange={() => {}} />
       <h1>Trending Articles</h1>
       <SearchBar onSearch={handleSearch} placeholder="Search article categories" />
-      <ToggleButton currentPage={currentPage} onPageToggle={handlePageToggle} />
+      <ToggleButton currentPage={currentPage} onPageToggle={onPageToggle} />
       <div className="article-list">
         <ListViewContainer>
           {filteredArticles.map((article) => (

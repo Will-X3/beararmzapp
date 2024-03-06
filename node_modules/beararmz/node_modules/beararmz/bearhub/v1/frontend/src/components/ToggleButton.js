@@ -8,7 +8,7 @@ const ToggleButton = ({ currentPage, onPageToggle }) => {
 
   const handleClick = () => {
     const targetPage = currentPage === 'videos' ? 'articles' : 'videos';
-    onPageToggle(targetPage); // Update the currentPage using onPageToggle function
+    onPageToggle(targetPage); 
     const targetUrl = targetPage === 'videos' ? '/trending-videos' : '/trending-articles';
     history.push(targetUrl);
   };

@@ -43,13 +43,20 @@ const App = () => {
           <Route exact path="/news/campaigns" component={CampaignsPage} />
           <Route exact path="/news/stories" component={StoriesPage} />
           <Route exact path="/news/spotlight-news" component={SpotlightNews} />
-          <Route exact path="/trending-articles" component={TrendingArticlesPage} />
+
+          {/* TrendingVideosPage */}
+          <Route exact path="/trending-videos">
+            <TrendingVideosPage currentPage={currentPage} onPageToggle={handlePageToggle} />
+          </Route>
+
+          {/* TrendingArticlesPage */}
+          <Route exact path="/trending-articles">
+            <TrendingArticlesPage currentPage={currentPage} onPageToggle={handlePageToggle} />
+          </Route>
+
+          {/* Default Route */}
           <Route path="/">
-            {currentPage === "videos" ? (
-              <TrendingVideosPage currentPage={currentPage} onPageToggle={handlePageToggle} />
-            ) : (
-              <TrendingArticlesPage currentPage={currentPage} onPageToggle={handlePageToggle} />
-            )}
+            <TrendingVideosPage currentPage={currentPage} onPageToggle={handlePageToggle} />
           </Route>
         </Switch>
         {/* Footer contents */}
