@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -7,6 +7,7 @@ import { dummyVideos } from '../data/dummyVideos'; // Import the dummyVideos arr
 
 const SliderView = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const sliderRef = useRef();
 
   const CustomPrevArrow = ({ onClick }) => (
     <div className="prev-arrow" onClick={onClick}>
@@ -33,9 +34,10 @@ const SliderView = () => {
     nextArrow: <CustomNextArrow />,
   };
 
+
   return (
     <div className="slider-container">
-      <Slider {...settings}>
+      <Slider {...settings} ref={sliderRef}>
         {dummyVideos.map((video, index) => (
           <div key={index}>
             <img src={video.url} alt={video.title} />

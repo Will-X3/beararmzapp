@@ -1,53 +1,55 @@
 /* Slider container */
 .slider-container {
   position: relative;
-  height: 160px;
-  width: 40%; /* Adjust the width as needed */
-  margin: 100px auto 5%; /* Center horizontally and add 100px top margin */
-  padding-left: 120px; /* Add left padding to create space for the arrow */
+  width: 100%; /* Adjust the width as needed */
+  max-width: 800px; /* Set maximum width */
+  margin: 50px auto; /* Center horizontally and add margin */
+  overflow: hidden; /* Hide overflowing content */
+  padding-top: 20px; /* Add padding on top */
+  padding-bottom: 40px; /* Add more padding on the bottom */
+  padding-left: 80px; /* Adjust the left padding as needed */
+}
+
+.slider-container img {
+  display: block;
+  width: 90%; /* Set the width to fill the container */
+  height: auto;
+  object-fit: cover;
 }
 
 /* Left and Right arrows */
 .prev-arrow,
 .next-arrow {
   position: absolute;
-  bottom: -60px; /* Adjust the distance from the bottom as needed */
-  font-size: 45px;
+  bottom: 20px; /* Position the arrows in the bottom padding */
+  z-index: 999;
+  display: block;
+  padding: 10px; /* Adjust arrow padding */
+  width: auto;
+  height: auto;
+  background: #009da8; /* Arrow background color */
   color: #000000;
-  z-index: 1;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px; /* Arrow font size */
+  opacity: 0.8;
   cursor: pointer;
+  border-radius: 50%;
 }
 
 .prev-arrow {
-  left: 40px; /* Adjust the distance from the left as needed */
+  left: 20px; /* Adjust left arrow position */
 }
 
 .next-arrow {
-  right: 40px; /* Adjust the distance from the right as needed */
-}
-
-/* Slides */
-.slide {
-  width: 160px; /* Set a fixed width for each slide */
-  height: 160px; /* Set a fixed height for each slide */
-  border-radius: 50%; /* Modified border-radius for circle shape */
-  background-size: cover;
-  background-position: center;
-  overflow: hidden; /* Hide any content that overflows the slide */
-  margin-right: 10px; /* Move the slides to the left by adding margin */
-}
-
-/* If you want to apply a background image to the slides */
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-
+  right: 20px; /* Adjust right arrow position */
 }
 
 /* Dots container */
 .dots-container {
-  margin-left: 100px;
-  left: 70%;
+  position: absolute;
+  bottom: 20px; /* Position the dots in the bottom padding */
+  left: 50%;
   transform: translateX(-50%);
+  margin: auto auto; /* Center horizontally and add margin */
 }
