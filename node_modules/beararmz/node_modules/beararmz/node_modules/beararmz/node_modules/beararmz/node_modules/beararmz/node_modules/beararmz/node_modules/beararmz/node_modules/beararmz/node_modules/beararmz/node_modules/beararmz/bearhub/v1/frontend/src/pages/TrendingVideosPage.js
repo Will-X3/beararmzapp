@@ -32,6 +32,7 @@ const TrendingVideosPage = React.memo(({ currentPage, onPageToggle }) => {
           "http://localhost:5000/v1/bearhub/videos"
         );
         const data = response.data;
+        console.log("Fetched videos:", data);
         setVideos(data);
       } catch (error) {
         console.error("Error fetching videos:", error);
@@ -41,13 +42,22 @@ const TrendingVideosPage = React.memo(({ currentPage, onPageToggle }) => {
   }, []);
 
   useEffect(() => {
+    console.log("Search input changed:", searchInput);
     const filtered = videos.filter(
       (video) =>
-        video.category &&
-        video.category.toLowerCase().includes(searchInput.toLowerCase())
+        (video.title &&
+          video.title.toLowerCase().includes(searchInput.toLowerCase())) ||
+        (video.description &&
+          video.description
+            .toLowerCase()
+            .includes(searchInput.toLowerCase())) ||
+        (video.category &&
+          video.category.toLowerCase().includes(searchInput.toLowerCase()))
     );
+
     // Check if the filtered array has changed
     if (!arraysAreEqual(filtered, filteredVideos)) {
+      console.log("Updating filtered videos:", filtered); // Log updating filtered videos
       setFilteredVideos(filtered);
     }
   }, [searchInput, videos, filteredVideos]);

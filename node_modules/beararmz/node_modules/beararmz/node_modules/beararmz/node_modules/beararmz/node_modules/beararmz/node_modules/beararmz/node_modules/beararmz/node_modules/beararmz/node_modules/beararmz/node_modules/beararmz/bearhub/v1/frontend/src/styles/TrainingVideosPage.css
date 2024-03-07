@@ -1,0 +1,15 @@
+.training-videos-page {
+    padding: 20px;
+  }
+  
+  .page-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .video-list {
+    margin-top: 20px;
+  }
+  
+  /* You can add more specific styling for your ListView component if needed */
+  

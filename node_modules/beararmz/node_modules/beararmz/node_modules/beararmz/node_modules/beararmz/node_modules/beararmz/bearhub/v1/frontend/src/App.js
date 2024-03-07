@@ -1,38 +1,35 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import TrendingVideosPage from "./pages/TrendingVideosPage";
-import TrendingArticlesPage from "./pages/TrendingArticlesPage";
+import TrainingVideosPage from "./pages/firearms/TrainingVideosPage";
 import LawsByState from "./pages/laws/LawsByState";
+import LegalUpdatesPage from "./pages/laws/LegalUpdates";
+import CampaignsPage from "./pages/news/CampaignsPage";
+import StoriesPage from "./pages/news/StoriesPage";
 import SpotlightNews from "../src/pages/news/SpotlightNews";
-import CampaignsPage from "../src/pages/news/CampaignsPage";
-import StoriesPage from "../src/pages/news/StoriesPage";
-import LegalUpdatesPage from "../src/pages/laws/LegalUpdates";
 import SliderView from "./components/SliderView";
+import SafetyPage from "./pages/firearms/SafetyPage";
+import MaintenancePage from "./pages/firearms/MaintenancePage";
+import HistoryPage from "./pages/firearms/HistoryPage";
+import AmmoPage from "./pages/firearms/AmmoPage";
+import TrendingArticlesPage from "./pages/TrendingArticlesPage";
 
 const App = () => {
   const location = useLocation();
   const [currentPage, setCurrentPage] = useState("videos");
 
   useEffect(() => {
-    const path = location.pathname;
-    setCurrentPage(getPageFromPath(path));
+    setCurrentPage(getPageFromPath(location.pathname));
   }, [location]);
 
   const handlePageToggle = () => {
-    setCurrentPage((prevPage) =>
-      prevPage === "videos" ? "articles" : "videos"
-    );
+    setCurrentPage((prevPage) => (prevPage === "videos" ? "articles" : "videos"));
   };
 
   const getPageFromPath = (path) => {
     if (path.startsWith("/laws")) return "laws";
-    if (path.startsWith("/campaigns")) return "campaigns";
+    if (path.startsWith("/news")) return "news";
     if (path.startsWith("/self-defense")) return "self-defense";
     if (path.startsWith("/firearms")) return "firearms";
     if (path.startsWith("/dictionary")) return "dictionary";
@@ -45,49 +42,34 @@ const App = () => {
       <div className="App">
         <Navbar />
         <Switch>
-          <Route exact path="/laws-by-state" component={LawsByState} />
-          <Route
-            exact
-            path="/laws-by-state/laws-by-state"
-            component={LawsByState}
-          />
-          <Route
-            exact
-            path="/laws-by-state/legal-updates"
-            component={LegalUpdatesPage}
-          />
+        <Route exact path="/laws" component={LawsByState} />
+
+          <Route exact path="/laws/laws-by-state" component={LawsByState} />
+          <Route exact path="/laws/legal-updates" component={LegalUpdatesPage} />
           <Route exact path="/news/campaigns" component={CampaignsPage} />
           <Route exact path="/news/stories" component={StoriesPage} />
           <Route exact path="/news/spotlight-news" component={SpotlightNews} />
+          <Route exact path="/firearms/training-videos" component={TrainingVideosPage} />
+          <Route exact path="/firearms/safety" component={SafetyPage} />
+          <Route exact path="/firearms/maintenance" component={MaintenancePage} />
+          <Route exact path="/firearms/history" component={HistoryPage} />
+          <Route exact path="/firearms/ammo" component={AmmoPage} />
 
-          {/* TrendingVideosPage */}
+          <Route exact path="/slider-view" component={SliderView} />
+
+
+
+          {/* Default Routes */}
           <Route exact path="/trending-videos">
-            <TrendingVideosPage
-              currentPage={currentPage}
-              onPageToggle={handlePageToggle}
-            />
+            <TrendingVideosPage currentPage={currentPage} onPageToggle={handlePageToggle} />
           </Route>
-
-          {/* TrendingArticlesPage */}
           <Route exact path="/trending-articles">
-            <TrendingArticlesPage
-              currentPage={currentPage}
-              onPageToggle={handlePageToggle}
-            />
+            <TrendingArticlesPage currentPage={currentPage} />
           </Route>
-          <Route exact path="/slider-view">
-            <SliderView />
-          </Route>
-
-          {/* Default Route */}
           <Route path="/">
-            <TrendingVideosPage
-              currentPage={currentPage}
-              onPageToggle={handlePageToggle}
-            />
+            <TrendingVideosPage currentPage={currentPage} onPageToggle={handlePageToggle} />
           </Route>
         </Switch>
-        {/* Footer contents */}
         <footer></footer>
       </div>
     </Router>

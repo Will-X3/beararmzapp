@@ -55,7 +55,7 @@ const NestedNavigation = () => {
         </li>
         <li className="active">
           <Link
-            to="/laws-by-state"
+            to="/laws"
             onClick={() => handleMainCategoryClick("laws")}
           >
             Laws
@@ -65,7 +65,7 @@ const NestedNavigation = () => {
               {subcategories.laws.map((subcategory, index) => (
                 <li key={index}>
                   <Link
-                    to={`/laws-by-state/${subcategory
+                    to={`/laws/${subcategory
                       .toLowerCase()
                       .replace(/\s/g, "-")}`}
                   >

@@ -1,0 +1,38 @@
+.safety-page {
+    padding: 20px;
+  }
+  
+  .safety-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Align vertically */
+    padding-top: 50px;
+  }
+  
+  .safety-tip {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .safety-tip img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .tip-description {
+    margin-top: 20px;
+  }
+  
+  .tip-description h2 {
+    margin-bottom: 10px;
+  }
+  
+  .tip-description p {
+    margin-bottom: 20px;
+  }
+  

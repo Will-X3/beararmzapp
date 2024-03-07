@@ -1,55 +1,62 @@
-/* Slider container */
+.slider-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
 .slider-container {
   position: relative;
-  width: 100%; /* Adjust the width as needed */
-  max-width: 800px; /* Set maximum width */
-  margin: 50px auto; /* Center horizontally and add margin */
-  overflow: hidden; /* Hide overflowing content */
-  padding-top: 20px; /* Add padding on top */
-  padding-bottom: 40px; /* Add more padding on the bottom */
-  padding-left: 80px; /* Adjust the left padding as needed */
+  height:500px;
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto;
+  border: 2px solid #ccc; /* Add border */
+  border-radius: 10px; /* Add border radius */
+  overflow: hidden; /* Prevents arrows from overflowing if they're too big */
 }
 
-.slider-container img {
-  display: block;
-  width: 90%; /* Set the width to fill the container */
-  height: auto;
-  object-fit: cover;
+.slide {
+  width: 100%;
 }
 
-/* Left and Right arrows */
 .prev-arrow,
 .next-arrow {
   position: absolute;
-  bottom: 20px; /* Position the arrows in the bottom padding */
-  z-index: 999;
-  display: block;
-  padding: 10px; /* Adjust arrow padding */
-  width: auto;
-  height: auto;
-  background: #009da8; /* Arrow background color */
-  color: #000000;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 18px; /* Arrow font size */
-  opacity: 0.8;
-  cursor: pointer;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
   border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .prev-arrow {
-  left: 20px; /* Adjust left arrow position */
+  left: 10px;
 }
 
 .next-arrow {
-  right: 20px; /* Adjust right arrow position */
+  right: 10px;
 }
 
-/* Dots container */
 .dots-container {
-  position: absolute;
-  bottom: 20px; /* Position the dots in the bottom padding */
-  left: 50%;
-  transform: translateX(-50%);
-  margin: auto auto; /* Center horizontally and add margin */
+  text-align: center;
+  margin-top: 20px;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #000;
 }

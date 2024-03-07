@@ -5,12 +5,18 @@ import '../styles/ToggleButton.css';
 
 const ToggleButton = ({ currentPage, onPageToggle }) => {
   const history = useHistory();
+  
 
   const handleClick = () => {
+    console.log('Toggle button clicked');
     const targetPage = currentPage === 'videos' ? 'articles' : 'videos';
+    console.log('Target page:', targetPage);
     onPageToggle(targetPage); 
     const targetUrl = targetPage === 'videos' ? '/trending-videos' : '/trending-articles';
+    console.log('Target URL:', targetUrl);
     history.push(targetUrl);
+
+    
   };
 
   const buttonClass = currentPage === 'videos' ? 'toggle-button videos' : 'toggle-button articles';

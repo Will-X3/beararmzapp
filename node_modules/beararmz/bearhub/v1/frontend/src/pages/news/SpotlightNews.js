@@ -1,7 +1,6 @@
 import React from "react";
 import "../../styles/SpotlightNews.css";
 import NestedNavigation from "../../components/NestedNavigation";
-import PropTypes from 'prop-types';
 
 
 const SpotlightNews = () => { // Receive currentPage prop

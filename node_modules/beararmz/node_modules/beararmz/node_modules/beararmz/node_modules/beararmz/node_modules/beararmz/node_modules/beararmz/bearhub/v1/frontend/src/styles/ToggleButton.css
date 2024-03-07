@@ -1,23 +1,25 @@
 .toggle-button {
-  margin-top: 250px;
+  margin-top: 20px;
   display: inline-block;
-  padding: 8px 60px;
+  padding: 10px 100px;
   border: none;
   border-radius: 20px;
   cursor: pointer;
   position: relative;
-}
+  margin-left: 50%;
+  transition: background-color 1.5s ease; /* Add transition effect */
 
+}
 
 .toggle-button.videos {
   padding-right: 10px;
-  background-color: #007bff;
+  background-color: #001a35;
   color: #fff;
 }
 
 .toggle-button.articles {
   padding-left: 10px;
-  background-color: #28a745;
+  background-color: #004610;
   color: #fff;
 }
 
@@ -29,5 +31,5 @@
   height: 100%;
   background-color: #fff;
   border-radius: 20px;
-  transition: left 0.3s ease-in-out;
+  transition: left 1.5s ease-in-out;
 }

@@ -1,0 +1,44 @@
+.maintenance-page {
+    padding: 20px;
+  }
+  
+  .maintenance-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .maintenance-tip {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .maintenance-tip img {
+    width: 200px;
+    height: auto;
+    margin-right: 20px;
+  }
+   
+  .tip-description {
+    flex: 1;
+  }
+  
+  .tip-description h2 {
+    margin-bottom: 10px;
+  }
+  
+  .tip-description p {
+    margin-bottom: 20px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+  
