@@ -19,13 +19,15 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const newArticle = await articlesController.createArticle(req, res);
+    const { title, content, category, imageUrl } = req.body;
+    const newArticle = await articlesController.createArticle(req, res, { title, content, category, imageUrl });
     res.status(201).json(newArticle);
   } catch (error) {
     console.error(error);
     res.status(400).json({ message: 'Bad request.' });
   }
 });
+
 
 router.put('/:articleId', async (req, res) => {
   try {

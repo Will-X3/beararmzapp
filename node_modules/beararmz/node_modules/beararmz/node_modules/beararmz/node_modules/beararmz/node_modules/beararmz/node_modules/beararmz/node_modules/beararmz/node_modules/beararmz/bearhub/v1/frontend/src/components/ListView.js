@@ -1,14 +1,15 @@
+// ListView.js
+
 import React from 'react';
-import { ListViewContainer } from '../styles/ListViewStyles';
+import '../styles/ListView.css'; // Import the CSS file
 import VideoCard from './VideoCard';
 import LegalCard from './LegalCard';
-import ArticleCard from './ArticleCard'; // Import the ArticleCard component
+import ArticleCard from './ArticleCard';
 
 const ListView = ({ type, items }) => {
   return (
-    <ListViewContainer>
+    <div className="listViewContainer"> {/* Update className */}
       {items.map((item) => {
-        // Render either VideoCard, LegalCard, or ArticleCard based on the type
         if (type === 'videos') {
           return (
             <VideoCard
@@ -17,7 +18,7 @@ const ListView = ({ type, items }) => {
               description={item.description}
               category={item.category}
               url={item.url}
-              isSearchResult={true} // Assuming this prop is used in VideoCard component
+              isSearchResult={true}
             />
           );
         } else if (type === 'legal') {
@@ -27,25 +28,24 @@ const ListView = ({ type, items }) => {
               title={item.title}
               description={item.description}
               category={item.category}
-              imageUrl={item.imageUrl} // Assuming LegalCard requires an imageUrl prop for the image
+              imageUrl={item.imageUrl}
             />
           );
         } else if (type === 'articles') {
           return (
             <ArticleCard
               key={item._id}
+              id={item._id}
               title={item.title}
               content={item.content}
               category={item.category}
-              isSearchResult={true} // Add isSearchResult prop for consistency
+              isSearchResult={true}
             />
           );
         }
-        
-        // Add a default return statement if none of the conditions are met
         return null;
       })}
-    </ListViewContainer>
+    </div>
   );
 };
 

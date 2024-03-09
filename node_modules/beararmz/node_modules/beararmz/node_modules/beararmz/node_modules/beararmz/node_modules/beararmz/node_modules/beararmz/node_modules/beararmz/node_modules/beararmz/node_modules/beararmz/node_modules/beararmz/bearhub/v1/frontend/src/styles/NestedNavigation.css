@@ -11,11 +11,12 @@
   padding: 0;
   margin: 0;
   display: flex;
-  position: relative; /* Set parent container position to relative */
+  position: relative;
+  justify-content: center; /* Center parent categories */
 }
 
 .nested-navigation li {
-  margin: 0 6px; /* Adjust spacing between items as needed */
+  margin: 0 10px; /* Adjust spacing between parent categories */
 }
 
 .nested-navigation a {
@@ -34,33 +35,41 @@
 
 
 /* Add styling for subcategories */
+/* NestedNavigation.css */
+
+/* Add flex-direction: row to subcategories */
 .subcategories {
-  position: absolute; /* Position subcategories relative to parent container */
-  top: 10%; /* Position subcategories below parent container */
-  left: 20%; /* Center subcategories horizontally */
+  display: flex;
+  flex-wrap: wrap; /* Allow subcategories to wrap to next line */
+  justify-content: center; /* Center subcategories horizontally */
 }
 
-/* Show subcategories when parent category is active */
-.nested-navigation .active .subcategories {
-  display: block;
-}
-
+/* Adjust margin between subcategories */
 .subcategories li {
-  margin: 10px 10px; /* Adjust spacing between subcategories */
+  margin: 10px; /* Adjust spacing between subcategories */
 }
 
+/* Ensure subcategory links are displayed inline */
 .subcategories a {
-  color: blue; /* Text color for subcategories */
-  text-decoration: none; /* Remove default underline for subcategory links */
-  font-weight: normal; /* Remove bold font weight for subcategory links */
-  display: block; /* Ensure subcategory links are displayed as block elements */
+  display: inline-block;
+  color: blue;
+  text-decoration: none;
+  font-weight: normal;
 }
 
+/* Underline active subcategory links */
 .subcategories .active a {
-  text-decoration: underline; /* Underline for active subcategory links */
+  text-decoration: underline;
 }
 
+/* Adjust media query for smaller screens */
 @media only screen and (max-width: 768px) {
-  .nested-navigation {
-    flex-direction: column;
-  }}
+  .subcategories {
+    flex-direction: column; /* Change to column layout for smaller screens */
+    align-items: center; /* Center subcategories vertically */
+  }
+
+  .subcategories li {
+    margin: 10px 0; /* Adjust spacing between subcategories for smaller screens */
+  }
+}

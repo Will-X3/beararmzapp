@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardContent, CardMedia, Typography, IconButton } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { Link } from 'react-router-dom'; // Import Link component
 import '../styles/VideoCard.css'; // Import only VideoCard.css for styling
 import ReactPlayer from 'react-player';
 import { getYouTubeThumbnailUrl } from '../utils';
@@ -10,43 +11,49 @@ const VideoCard = ({ title, description, url, category, isSearchResult }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlayClick = () => {
+    console.log('Play button clicked');
+
     setIsPlaying(!isPlaying);
   };
+  console.log('Video URL:', url);
+  console.log('Is playing:', isPlaying);
 
   return (
-    <Card className="video-card">
-      <CardMedia component="img" alt={title} image={getYouTubeThumbnailUrl(url)} />
-      <CardContent>
-        <Typography variant="h6" component="div">
-          {title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {description}
-        </Typography>
-        {isSearchResult && (
-          <Typography variant="body2" color="text.secondary">
-            Category: {category}
+    <Link to={`/videos/${encodeURIComponent(url)}`}> {/* Use Link to wrap the card */}
+      <Card className="video-card">
+        <CardMedia component="img" alt={title} image={getYouTubeThumbnailUrl(url)} />
+        <CardContent>
+          <Typography variant="h6" component="div">
+            {title}
           </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {description}
+          </Typography>
+          {isSearchResult && (
+            <Typography variant="body2" color="text.secondary">
+              Category: {category}
+            </Typography>
+          )}
+        </CardContent>
+        {!isPlaying && (
+          <IconButton className="play-button" color="primary" aria-label="play" onClick={handlePlayClick}>
+            <PlayArrowIcon />
+          </IconButton>
         )}
-      </CardContent>
-      {!isPlaying && (
-        <IconButton className="play-button" color="primary" aria-label="play" onClick={handlePlayClick}>
-          <PlayArrowIcon />
-        </IconButton>
-      )}
-      {isPlaying && (
-        <div className="react-player-wrapper">
-          <ReactPlayer
-            url={url}
-            width="100%"
-            height="100%"
-            controls
-            playing={true}
-            style={{ position: 'absolute', top: 0, left: 0 }}
-          />
-        </div>
-      )}
-    </Card>
+        {isPlaying && (
+          <div className="react-player-wrapper">
+            <ReactPlayer
+              url={url}
+              width="100%"
+              height="100%"
+              controls
+              playing={true}
+              style={{ position: 'absolute', top: 0, left: 0 }}
+            />
+          </div>
+        )}
+      </Card>
+    </Link>
   );
 };
 

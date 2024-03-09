@@ -1,26 +1,43 @@
-// components/Drawer.js
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import '../styles/Drawer.css';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
-const Drawer = ({ isOpen, onClose }) => {
+const CustomDrawer = ({ isOpen, onClose }) => {
   return (
-    <div className={`drawer ${isOpen ? 'open' : ''}`}>
+    <Drawer
+      anchor="right" // Change the anchor to "right"
+      open={isOpen}
+      onClose={onClose}
+      sx={{
+        '& .MuiDrawer-paper': {
+          width: 300,
+        },
+      }}
+    >
       <div className="drawer-header">
-        <button className="close-button" onClick={onClose}>
-          <FontAwesomeIcon icon={faTimes} />
-        </button>
+        <IconButton onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
       </div>
       <div className="drawer-content">
-        <ul>
-          <li><a href="#">Link 1</a></li>
-          <li><a href="#">Link 2</a></li>
-          <li><a href="#">Link 3</a></li>
-        </ul>
+        <List>
+          <ListItem button>
+            <ListItemText primary="Link 1" />
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary="Link 2" />
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary="Link 3" />
+          </ListItem>
+        </List>
       </div>
-    </div>
+    </Drawer>
   );
 };
 
-export default Drawer;
+export default CustomDrawer;

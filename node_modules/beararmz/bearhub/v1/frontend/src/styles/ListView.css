@@ -1,0 +1,29 @@
+/* ListView.css */
+
+.listViewContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px; /* Adjust spacing between items */
+  }
+  
+  .listViewContainer > * {
+    flex-basis: calc(33.33% - 13.33px); /* Adjust width for spacing */
+  }
+  
+  /* Adjust the width of each video item */
+  .listViewContainer .videoCard {
+    flex-basis: calc(50% - 10px); /* Adjust width for videos */
+  }
+  
+  @media screen and (max-width: 768px) {
+    .listViewContainer > * {
+      flex-basis: calc(100% - 20px); /* Full width for smaller screens */
+    }
+  
+    /* Adjust the width of each video item for smaller screens */
+    .listViewContainer .videoCard {
+      flex-basis: calc(100% - 20px); /* Full width for videos on smaller screens */
+    }
+  }
+  

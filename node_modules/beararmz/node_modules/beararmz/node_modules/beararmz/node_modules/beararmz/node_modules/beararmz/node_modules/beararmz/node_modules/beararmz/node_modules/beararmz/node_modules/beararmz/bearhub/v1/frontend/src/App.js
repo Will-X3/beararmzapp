@@ -21,6 +21,8 @@ import AmmoPage from "./pages/firearms/AmmoPage";
 import TrendingArticlesPage from "./pages/TrendingArticlesPage";
 import EmergencyPreparedness from "./pages/emergency/PreparednessPage";
 import EmergencyResponse from "./pages/emergency/ResponsePage";
+import VideoDetails from "./components/VideoDetails";
+import ArticleDetails from "./components/ArticleDetails";
 
 const App = () => {
   const location = useLocation();
@@ -113,6 +115,9 @@ const App = () => {
               <TrendingArticlesPage onPageToggle={handlePageToggle} />
             )}
           />
+          <Route path="/videos/:videoUrl" component={VideoDetails} />
+          <Route path="/article/:articleId" component={ArticleDetails} />
+
 
           <Route path="/">
             <TrendingVideosPage
@@ -120,6 +125,7 @@ const App = () => {
               onPageToggle={handlePageToggle}
             />
           </Route>
+          <Route />
           <Route exact path="/slider-view" component={SliderView} />
         </Switch>
 

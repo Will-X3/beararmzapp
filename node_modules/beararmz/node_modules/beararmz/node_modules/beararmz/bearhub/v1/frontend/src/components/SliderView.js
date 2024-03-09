@@ -12,7 +12,6 @@ const SliderView = () => {
         const response = await axios.get(
           "http://localhost:5000/v1/bearhub/videos"
         );
-        console.log("Videos fetched successfully:", response.data); // Log the fetched videos
         setVideos(response.data);
       } catch (error) {
         console.error("Error fetching videos:", error);
@@ -23,21 +22,18 @@ const SliderView = () => {
   }, []);
 
   const handlePrev = () => {
-    console.log("Previous clicked");
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? videos.length - 1 : prevIndex - 1
     );
   };
 
   const handleNext = () => {
-    console.log("Next clicked");
     setCurrentIndex((prevIndex) =>
       prevIndex === videos.length - 1 ? 0 : prevIndex + 1
     );
   };
 
-  console.log("Current index:", currentIndex); // Log the current index
-  console.log("Videos:", videos);
+
 
   return (
     <div className="slider-wrapper">

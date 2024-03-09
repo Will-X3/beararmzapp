@@ -8,7 +8,6 @@ const NestedNavigation = () => {
   const [activeSubcategory, setActiveSubcategory] = useState(null);
 
   useEffect(() => {
-    console.log("showSubcategories toggled to:", showSubcategories);
   }, [showSubcategories]);
 
   // Function to handle main category click

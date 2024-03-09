@@ -11,10 +11,10 @@ const getAllArticles = async (req, res) => {
 };
 
 const createArticle = async (req, res) => {
-  const { title, content } = req.body;
+  const { title, content, category, imageUrl } = req.body;
 
   try {
-    const newArticle = new Article({ title, content, category: req.body.category });
+    const newArticle = new Article({ title, content, category, imageUrl }); // Include imageUrl in the Article creation
     await newArticle.save();
     res.status(201).json(newArticle);
   } catch (error) {
@@ -25,12 +25,12 @@ const createArticle = async (req, res) => {
 
 const updateArticle = async (req, res) => {
   const { articleId } = req.params;
-  const { title, content } = req.body;
+  const { title, content, imageUrl } = req.body; // Include imageUrl in the request body
 
   try {
     const updatedArticle = await Article.findByIdAndUpdate(
       articleId,
-      { title, content },
+      { title, content, imageUrl }, // Update the imageUrl along with title and content
       { new: true }
     );
 
@@ -44,6 +44,7 @@ const updateArticle = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
 
 const deleteArticle = async (req, res) => {
   const { articleId } = req.params;
