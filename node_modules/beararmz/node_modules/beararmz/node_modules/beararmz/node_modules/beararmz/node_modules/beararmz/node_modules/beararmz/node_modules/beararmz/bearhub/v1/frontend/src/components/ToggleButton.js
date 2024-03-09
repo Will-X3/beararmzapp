@@ -12,7 +12,7 @@ const ToggleButton = ({ currentPage, onPageToggle }) => {
     const targetPage = currentPage === 'videos' ? 'articles' : 'videos';
     console.log('Target page:', targetPage);
     onPageToggle(targetPage); 
-    const targetUrl = targetPage === 'videos' ? '/trending-videos' : '/trending-articles';
+    const targetUrl = targetPage === 'videos' ? '/trending/trending-videos' : '/trending/trending-articles';
     console.log('Target URL:', targetUrl);
     history.push(targetUrl);
 

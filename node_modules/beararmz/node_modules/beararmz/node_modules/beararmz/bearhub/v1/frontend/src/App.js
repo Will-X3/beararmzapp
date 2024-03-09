@@ -87,6 +87,20 @@ const App = () => {
           />
           <Route
             exact
+            path="/trending/trending-videos"
+            component={() => (
+              <TrendingVideosPage onPageToggle={handlePageToggle} />
+            )}
+          />
+          <Route
+            exact
+            path="/trending/trending-articles"
+            component={() => (
+              <TrendingArticlesPage onPageToggle={handlePageToggle} />
+            )}
+          />
+          <Route
+            exact
             path="/trending-videos"
             component={() => (
               <TrendingVideosPage onPageToggle={handlePageToggle} />

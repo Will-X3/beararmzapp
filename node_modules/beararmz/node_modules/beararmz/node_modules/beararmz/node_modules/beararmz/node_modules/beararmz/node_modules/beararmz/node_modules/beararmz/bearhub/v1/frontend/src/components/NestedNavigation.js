@@ -93,10 +93,14 @@ const NestedNavigation = () => {
         <li className={activeCategory === "videos" ? "active" : ""}>
           <Link
             to="/trending"
-            onClick={() => handleMainCategoryClick("trending")}
+            onClick={(e) => {
+              preventDefault(e);
+              handleMainCategoryClick("trending");
+            }}
           >
             What's Trending
           </Link>
+          {showSubcategories.trending && renderSubcategories("trending")}
         </li>
         <li className={activeCategory === "laws" ? "active" : ""}>
           <Link
