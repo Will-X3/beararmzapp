@@ -39,8 +39,7 @@ const NestedNavigation = () => {
     laws: ["Legal Updates", "Laws By State"],
     news: ["Spotlight News", "Campaigns", "Stories"],
     selfDefense: [
-      "Directory",
-      "Videos",
+      "Training Videos",
       "Survival Skills",
       "Demographics",
       "Non-Lethal",
@@ -49,7 +48,6 @@ const NestedNavigation = () => {
     ],
     firearms: ["Training Videos", "Safety", "Maintenance", "History", "Ammo"],
     dictionary: [
-      "Directory",
       "Legal Terms",
       "Self Defense",
       "Medical Terms",

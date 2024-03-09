@@ -1,0 +1,15 @@
+.related-articles-container {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    gap: 20px; /* Adjust as needed */
+  }
+  
+  .related-articles-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+  }
+  
+  .related-articles-container > * {
+    flex: 0 0 auto;
+    width: 300px; /* Adjust as needed */
+  }
+  
