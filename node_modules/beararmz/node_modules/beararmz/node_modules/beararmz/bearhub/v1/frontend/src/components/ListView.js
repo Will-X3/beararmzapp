@@ -6,7 +6,11 @@ import VideoCard from './VideoCard';
 import LegalCard from './LegalCard';
 import ArticleCard from './ArticleCard';
 
-const ListView = ({ type, items }) => {
+const ListView = ({ type, items, onSelect }) => { // Added onSelect prop
+  const handleItemClick = (item) => { // Added function to handle item clicks
+    onSelect(item); // Invoke the onSelect callback with the clicked item
+  };
+
   return (
     <div className="listViewContainer"> {/* Update className */}
       {items.map((item) => {
@@ -19,6 +23,7 @@ const ListView = ({ type, items }) => {
               category={item.category}
               url={item.url}
               isSearchResult={true}
+              onClick={() => handleItemClick(item)} // Handle click for video card
             />
           );
         } else if (type === 'legal') {
@@ -29,6 +34,7 @@ const ListView = ({ type, items }) => {
               description={item.description}
               category={item.category}
               imageUrl={item.imageUrl}
+              onClick={() => handleItemClick(item)} // Handle click for legal card
             />
           );
         } else if (type === 'articles') {
@@ -40,6 +46,7 @@ const ListView = ({ type, items }) => {
               content={item.content}
               category={item.category}
               isSearchResult={true}
+              onClick={() => handleItemClick(item)} // Handle click for article card
             />
           );
         }
