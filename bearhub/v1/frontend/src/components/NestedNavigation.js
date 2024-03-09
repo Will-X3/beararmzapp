@@ -4,25 +4,39 @@ import "../styles/NestedNavigation.css";
 
 const NestedNavigation = () => {
   const [showSubcategories, setShowSubcategories] = useState(false);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [activeSubcategory, setActiveSubcategory] = useState(null);
 
   useEffect(() => {
     console.log("showSubcategories toggled to:", showSubcategories);
   }, [showSubcategories]);
 
+  // Function to handle main category click
   const handleMainCategoryClick = (category) => {
     setShowSubcategories((prevState) => {
       // Create a new state object with all categories hidden
       const newState = Object.fromEntries(
         Object.keys(prevState).map((key) => [key, false])
       );
-      // Set the visibility of the clicked category to true
-      newState[category] = true;
+      // Toggle the visibility of the clicked category
+      newState[category] = !prevState[category];
       return newState;
     });
+    // Update the active category state
+    setActiveCategory(category);
+    // Reset active subcategory
+    setActiveSubcategory(null);
   };
-  
+
+  // Function to handle subcategory click
+  const handleSubcategoryClick = (category, subcategory) => {
+    // Update the active category and subcategory states
+    setActiveCategory(category);
+    setActiveSubcategory(subcategory);
+  };
 
   const subcategories = {
+    trending: ["Trending Videos", "Trending Articles"],
     laws: ["Legal Updates", "Laws By State"],
     news: ["Spotlight News", "Campaigns", "Stories"],
     selfDefense: [
@@ -44,42 +58,65 @@ const NestedNavigation = () => {
     ],
     emergency: ["Emergency Response", "Emergency Preparedness"],
   };
+  // Render subcategories based on the visibility state
+  const renderSubcategories = (category) => {
+    return (
+      <ul className="subcategories">
+        {subcategories[category].map((subcategory, index) => (
+          <li
+            key={index}
+            className={activeSubcategory === subcategory ? "active" : ""}
+          >
+            <Link
+              to={`/${category}/${subcategory
+                .toLowerCase()
+                .replace(/\s/g, "-")}`}
+              onClick={() => handleSubcategoryClick(subcategory)}
+            >
+              {subcategory}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
+  const preventDefault = (e) => {
+    if (e.target.getAttribute("to") !== "/trending") {
+      e.preventDefault();
+    }
+  };
 
   return (
     <div className="nested-navigation">
       <ul>
-        <li className="active">
-          <Link to="/trending-videos" onClick={handleMainCategoryClick}>
-            Trending Videos
+        <li className={activeCategory === "videos" ? "active" : ""}>
+          <Link
+            to="/trending"
+            onClick={() => handleMainCategoryClick("trending")}
+          >
+            What's Trending
           </Link>
         </li>
-        <li className="active">
+        <li className={activeCategory === "laws" ? "active" : ""}>
           <Link
             to="/laws"
-            onClick={() => handleMainCategoryClick("laws")}
+            onClick={(e) => {
+              preventDefault(e);
+              handleMainCategoryClick("laws");
+            }}
           >
             Laws
           </Link>
-          {showSubcategories.laws && (
-            <ul className="subcategories">
-              {subcategories.laws.map((subcategory, index) => (
-                <li key={index}>
-                  <Link
-                    to={`/laws/${subcategory
-                      .toLowerCase()
-                      .replace(/\s/g, "-")}`}
-                  >
-                    {subcategory}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
+          {showSubcategories.laws && renderSubcategories("laws")}
         </li>
-        <li className="active">
+        <li className={activeCategory === "news" ? "active" : ""}>
           <Link
-            to="/news/campaigns"
-            onClick={() => handleMainCategoryClick("news")}
+            to="/news"
+            onClick={(e) => {
+              preventDefault(e);
+              handleMainCategoryClick("news");
+            }}
           >
             News
           </Link>
@@ -99,10 +136,13 @@ const NestedNavigation = () => {
             </ul>
           )}
         </li>
-        <li className="active">
+        <li className={activeCategory === "selfDefense" ? "active" : ""}>
           <Link
             to="/self-defense"
-            onClick={() => handleMainCategoryClick("selfDefense")}
+            onClick={(e) => {
+              preventDefault(e);
+              handleMainCategoryClick("selfDefense");
+            }}
           >
             Self-defense
           </Link>
@@ -122,10 +162,13 @@ const NestedNavigation = () => {
             </ul>
           )}
         </li>
-        <li className="active">
+        <li className={activeCategory === "firearms" ? "active" : ""}>
           <Link
             to="/firearms"
-            onClick={() => handleMainCategoryClick("firearms")}
+            onClick={(e) => {
+              preventDefault(e);
+              handleMainCategoryClick("firearms");
+            }}
           >
             Firearms
           </Link>
@@ -145,10 +188,13 @@ const NestedNavigation = () => {
             </ul>
           )}
         </li>
-        <li className="active">
+        <li className={activeCategory === "dictionary" ? "active" : ""}>
           <Link
             to="/dictionary"
-            onClick={() => handleMainCategoryClick("dictionary")}
+            onClick={(e) => {
+              preventDefault(e);
+              handleMainCategoryClick("dictionary");
+            }}
           >
             Dictionary
           </Link>
@@ -168,10 +214,13 @@ const NestedNavigation = () => {
             </ul>
           )}
         </li>
-        <li className="active">
+        <li className={activeCategory === "emergency" ? "active" : ""}>
           <Link
             to="/emergency"
-            onClick={() => handleMainCategoryClick("emergency")}
+            onClick={(e) => {
+              preventDefault(e);
+              handleMainCategoryClick("emergency");
+            }}
           >
             Emergency
           </Link>
@@ -191,7 +240,6 @@ const NestedNavigation = () => {
             </ul>
           )}
         </li>
-
         {/* Repeat for other categories */}
       </ul>
     </div>

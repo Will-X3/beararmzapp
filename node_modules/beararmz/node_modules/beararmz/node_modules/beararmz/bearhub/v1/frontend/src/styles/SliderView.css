@@ -11,9 +11,9 @@
   width: 100%;
   max-width: 800px;
   margin: 40px auto;
-  border: 2px solid #ccc; /* Add border */
-  border-radius: 10px; /* Add border radius */
-  overflow: hidden; /* Prevents arrows from overflowing if they're too big */
+  border: 2px solid #ccc; 
+  border-radius: 10px; 
+  overflow: hidden; 
 }
 
 .slide {

@@ -3,7 +3,7 @@
 .nested-navigation {
   display: flex;
   justify-content: center;
-  margin-top: 20px; /* Adjust as needed */
+  margin-top: 10px; /* Adjust as needed */
 }
 
 .nested-navigation ul {
@@ -15,7 +15,7 @@
 }
 
 .nested-navigation li {
-  margin: 0 10px; /* Adjust spacing between items as needed */
+  margin: 0 6px; /* Adjust spacing between items as needed */
 }
 
 .nested-navigation a {
@@ -26,15 +26,23 @@
   position: relative; /* Set position to relative for parent links */
 }
 
-.nested-navigation .active a {
-  text-decoration: underline; /* Underline for active links */
+.nested-navigation li.active a {
+  text-decoration: underline;
+  font-weight: bold; /* Add additional styling for active links */
+  color: blue; /* Change the color of active links */
 }
+
 
 /* Add styling for subcategories */
 .subcategories {
   position: absolute; /* Position subcategories relative to parent container */
-  top: 0%; /* Position subcategories below parent container */
-  left: -60%; /* Center subcategories horizontally */
+  top: 10%; /* Position subcategories below parent container */
+  left: 20%; /* Center subcategories horizontally */
+}
+
+/* Show subcategories when parent category is active */
+.nested-navigation .active .subcategories {
+  display: block;
 }
 
 .subcategories li {
@@ -42,10 +50,17 @@
 }
 
 .subcategories a {
-  color: #333; /* Text color for subcategories */
-  position: relative; /* Set position to relative for subcategory links */
+  color: blue; /* Text color for subcategories */
+  text-decoration: none; /* Remove default underline for subcategory links */
+  font-weight: normal; /* Remove bold font weight for subcategory links */
+  display: block; /* Ensure subcategory links are displayed as block elements */
 }
 
 .subcategories .active a {
   text-decoration: underline; /* Underline for active subcategory links */
 }
+
+@media only screen and (max-width: 768px) {
+  .nested-navigation {
+    flex-direction: column;
+  }}

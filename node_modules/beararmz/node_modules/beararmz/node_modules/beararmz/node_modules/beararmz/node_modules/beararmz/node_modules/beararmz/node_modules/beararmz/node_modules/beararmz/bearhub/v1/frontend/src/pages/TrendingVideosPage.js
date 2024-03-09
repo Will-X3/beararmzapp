@@ -69,7 +69,7 @@ const TrendingVideosPage = React.memo(({ currentPage, onPageToggle }) => {
   return (
     <div className="trending-videos-page">
       <NestedNavigation currentPage={currentPage} onPageChange={() => {}} />
-      <SliderView items={filteredVideos} viewType="video" />
+      <SliderView items={videos} viewType="video" />
       <SearchBar
         onSearch={handleSearch}
         placeholder="Search video categories"
