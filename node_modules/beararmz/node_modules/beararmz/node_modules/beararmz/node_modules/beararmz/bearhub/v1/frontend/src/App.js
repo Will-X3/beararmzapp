@@ -25,6 +25,7 @@ import VideoDetails from "./components/VideoDetails";
 import ArticleDetails from "./components/ArticleDetails";
 import SelfDefenseVideos from "./pages/self-defense/SelfDefenseVideos";
 import SurvivalSkillsPage from "./pages/self-defense/SurvivalSkillsPage";
+import DemographicsPage from "./pages/self-defense/DemographicsPage";
 
 const App = () => {
   const location = useLocation();
@@ -119,6 +120,8 @@ const App = () => {
           />
           <Route exact path="/self-defense/training-videos" component={SelfDefenseVideos}/>
           <Route exact path="/self-defense/survival-skills" component={SurvivalSkillsPage}/>
+          <Route exact path="/self-defense/demographics" component={DemographicsPage}/>
+
 
           {/*Path for article and video details pages*/}
           <Route path="/videos/:videoUrl" component={VideoDetails} /> 

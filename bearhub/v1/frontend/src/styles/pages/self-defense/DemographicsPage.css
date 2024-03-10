@@ -1,0 +1,32 @@
+/* DemographicsPage.css */
+
+/* Container for the entire page */
+.demographics-page {
+    padding: 20px;
+  }
+  
+  /* Styles for the demographics section */
+  .demographics-section {
+    margin-bottom: 20px;
+  }
+  
+  /* Styles for the related articles and videos sections */
+  .article-scrollable-row,
+  .video-scrollable-row {
+    margin-bottom: 20px;
+  }
+  
+  /* Styles for the scrollable row */
+  .scrollable-row {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    gap: 20px; /* Gap between cards */
+  }
+  
+  /* Styles for individual ArticleCard and VideoCard components */
+  .article-card,
+  .video-card {
+    flex: 0 0 auto; /* Prevent cards from shrinking */
+    width: 250px; /* Width of each card */
+  }
+  
