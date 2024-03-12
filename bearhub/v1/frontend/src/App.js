@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
-  useLocation,
+  Switch
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import TrendingVideosPage from "./pages/TrendingVideosPage";
@@ -26,14 +25,18 @@ import ArticleDetails from "./components/ArticleDetails";
 import SelfDefenseVideos from "./pages/self-defense/SelfDefenseVideos";
 import SurvivalSkillsPage from "./pages/self-defense/SurvivalSkillsPage";
 import DemographicsPage from "./pages/self-defense/DemographicsPage";
+import NonLethalPage from "./pages/self-defense/NonLethalPage";
+import BasicDefensePage from './pages/self-defense/BasicDefensePage';
+import PersonalDefensePage from "./pages/self-defense/PersonalDefensePage";
+import DictionaryPage from "./pages/dictionary/DictionaryPage";
+import CreateUserForm from "./forms/CreateUserForm";
 
 const App = () => {
-  const location = useLocation();
   const [currentPage, setCurrentPage] = useState("videos");
 
   useEffect(() => {
-    setCurrentPage(getPageFromPath(location.pathname));
-  }, [location]);
+    setCurrentPage(getPageFromPath(window.location.pathname));
+  }, []);
 
   const handlePageToggle = () => {
     setCurrentPage((prevPage) =>
@@ -121,20 +124,24 @@ const App = () => {
           <Route exact path="/self-defense/training-videos" component={SelfDefenseVideos}/>
           <Route exact path="/self-defense/survival-skills" component={SurvivalSkillsPage}/>
           <Route exact path="/self-defense/demographics" component={DemographicsPage}/>
+          <Route exact path="/self-defense/non-lethal" component={NonLethalPage}/>
+          <Route exact path="/self-defense/basic-defense" component={BasicDefensePage}/>
+          <Route exact path="/self-defense/personal-defense" component={PersonalDefensePage}/>
 
+          <Route exact path="/dictionary" component={DictionaryPage}/>
 
-          {/*Path for article and video details pages*/}
+          {/* Path for article and video details pages */}
           <Route path="/videos/:videoUrl" component={VideoDetails} /> 
           <Route path="/article/:articleId" component={ArticleDetails} />
 
+          <Route exact path="/user" component={CreateUserForm} />
 
-          <Route path="/">
+          <Route exact path="/" component={() => (
             <TrendingVideosPage
               currentPage={currentPage}
               onPageToggle={handlePageToggle}
             />
-          </Route>
-          <Route />
+          )} />
           <Route exact path="/slider-view" component={SliderView} />
         </Switch>
 
