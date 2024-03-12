@@ -6,7 +6,7 @@ import axios from "axios";
 import { IconButton } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import CommentIcon from "@mui/icons-material/Comment";
+import CommentButton from "../components/CommentButton";
 
 const ArticleDetails = () => {
   const { articleId } = useParams();
@@ -66,9 +66,8 @@ const ArticleDetails = () => {
                   <IconButton aria-label="Dislike">
                     <ThumbDownIcon />
                   </IconButton>
-                  <IconButton aria-label="Comment">
-                    <CommentIcon />
-                  </IconButton>
+                  <CommentButton />
+
                 </div>
               </div>
             </Paper>

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import IconButton from '@mui/material/IconButton';
+import CommentIcon from '@mui/icons-material/Comment';
 import '../styles/CommentButton.css'; // Import the CSS file
 
 const CommentComponent = () => {
@@ -41,9 +43,9 @@ const CommentComponent = () => {
 
     return (
         <div className="comment-container">
-            <button className="comment-button" onClick={handleButtonClick}>
-                {expanded ? 'Close' : 'Comment'}
-            </button>
+            <IconButton className="comment-button" onClick={handleButtonClick}>
+                <CommentIcon />
+            </IconButton>
             {expanded && (
                 <div>
                     <textarea

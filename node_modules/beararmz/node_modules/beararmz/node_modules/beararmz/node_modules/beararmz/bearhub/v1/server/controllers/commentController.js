@@ -11,15 +11,15 @@ const getAllComments = async (req, res) => {
 };
 
 const createComment = async (req, res) => {
-  const { content } = req.body;
+  const { content, videoId, articleId, userId } = req.body;
   
   try {
     // Basic input validation
-    if (!content) {
-      return res.status(400).json({ message: 'Content is required.' });
+    if (!content || !videoId || !articleId || !userId) {
+      return res.status(400).json({ message: 'Content, videoId, articleId, and userId are required.' });
     }
 
-    const newComment = new Comment({ content });
+    const newComment = new Comment({ content, videoId, articleId, userId });
     await newComment.save();
     return res.status(201).json({ comment: newComment });
   } catch (error) {
@@ -27,6 +27,7 @@ const createComment = async (req, res) => {
     return res.status(500).json({ message: 'Failed to create comment.' });
   }
 };
+
 
 
 const updateComment = async (commentId, text) => {

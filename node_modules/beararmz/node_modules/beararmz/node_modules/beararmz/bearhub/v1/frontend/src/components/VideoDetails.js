@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import '../styles/VideoDetails.css';
 import NestedNavigation from './NestedNavigation';
+import CommentButton from "../components/CommentButton";
 
 const VideoDetails = () => {
   // Access the URL parameter containing the video URL
@@ -28,6 +29,8 @@ const VideoDetails = () => {
           <span className="metadata-item">Author: John Doe</span>
           <span className="metadata-item">Views: 1000</span>
           <span className="metadata-item">Likes: 500</span>
+          <CommentButton />
+
         </div>
       </div>
     </div>
