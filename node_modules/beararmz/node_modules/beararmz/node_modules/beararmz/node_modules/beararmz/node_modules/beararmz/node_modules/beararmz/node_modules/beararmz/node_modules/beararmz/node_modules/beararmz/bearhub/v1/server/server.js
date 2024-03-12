@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const {errorHandler} = require('../server/middleware/errorHandler');
 
+const authRoutes = require('./routes/authRoutes');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -28,6 +30,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(errorHandler);
 
 
+// Authentication Route
+app.use('/auth', authRoutes);
+
+
+
 // Routes
 const articlesRoutes = require('./routes/articlesRoutes');
 const videosRoute = require('./routes/videosRoute');
@@ -35,6 +42,7 @@ const reviewsRoute = require('./routes/reviewsRoute');
 const userRoute = require('./routes/userRoute'); 
 const categoryRoute = require('./routes/categoryRoute');
 const commentRoute = require('./routes/commentRoute'); 
+
 
 // Use routes
 app.use('/v1/bearhub/articles', articlesRoutes);

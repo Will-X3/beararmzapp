@@ -1,0 +1,73 @@
+/* BasicDefensePage.css */
+
+.basic-defense-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.basic-defense-section {
+    margin-bottom: 20px;
+}
+
+.article-scrollable-row, .video-scrollable-row {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 30px;
+}
+
+.scrollable-row {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.scrollable-row > * {
+    flex: 0 0 auto;
+    margin-right: 10px;
+}
+
+.scrollable-row > *:last-child {
+    margin-right: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.ArticleCard, .VideoCard {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.ArticleCard:hover, .VideoCard:hover {
+    transform: translateY(-2px);
+    transition: transform 0.3s ease;
+}
+
+.ArticleCard img, .VideoCard img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.ArticleCard, .VideoCard {
+    background-color: #fff;
+    padding: 15px;
+    width: 250px;
+    max-width: 100%;
+}
+
+.ArticleCard h3, .VideoCard h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.ArticleCard p, .VideoCard p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+}

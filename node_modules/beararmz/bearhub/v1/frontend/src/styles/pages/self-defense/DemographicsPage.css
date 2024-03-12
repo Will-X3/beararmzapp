@@ -1,32 +1,60 @@
 /* DemographicsPage.css */
 
-/* Container for the entire page */
+/* Add your custom styles for the demographics page here */
+
 .demographics-page {
-    padding: 20px;
-  }
-  
-  /* Styles for the demographics section */
-  .demographics-section {
-    margin-bottom: 20px;
-  }
-  
-  /* Styles for the related articles and videos sections */
-  .article-scrollable-row,
-  .video-scrollable-row {
-    margin-bottom: 20px;
-  }
-  
-  /* Styles for the scrollable row */
-  .scrollable-row {
-    display: flex;
-    overflow-x: auto; /* Enable horizontal scrolling */
-    gap: 20px; /* Gap between cards */
-  }
-  
-  /* Styles for individual ArticleCard and VideoCard components */
-  .article-card,
-  .video-card {
-    flex: 0 0 auto; /* Prevent cards from shrinking */
-    width: 250px; /* Width of each card */
-  }
-  
+  padding: 20px;
+}
+
+.demographics-section {
+  margin-bottom: 40px;
+}
+
+/* Styles for Morris.js charts */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.col-sm-6 {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+
+.label-success {
+  background-color: #5cb85c;
+}
+
+/* Adjust chart container sizes and add borders */
+#area-chart,
+#line-chart,
+#bar-chart,
+#stacked,
+#pie-chart {
+  min-height: 400px; /* Increase the height for better visibility */
+  border: 1px solid #ccc; /* Add a border around the charts */
+}
+
+/* Adjust other styles as needed */

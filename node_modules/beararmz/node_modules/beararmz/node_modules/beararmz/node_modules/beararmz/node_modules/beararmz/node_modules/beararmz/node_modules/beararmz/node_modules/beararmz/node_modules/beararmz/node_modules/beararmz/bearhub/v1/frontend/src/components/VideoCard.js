@@ -11,12 +11,10 @@ const VideoCard = ({ title, description, url, category, isSearchResult }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlayClick = () => {
-    console.log('Play button clicked');
 
     setIsPlaying(!isPlaying);
   };
-  console.log('Video URL:', url);
-  console.log('Is playing:', isPlaying);
+
 
   return (
     <Link to={`/videos/${encodeURIComponent(url)}`}> {/* Use Link to wrap the card */}

@@ -1,0 +1,17 @@
+/* LoginForm.css */
+
+.form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .textField {
+    margin-bottom: 16px;
+  }
+  
+  .button {
+    margin-top: 16px;
+  }
+  

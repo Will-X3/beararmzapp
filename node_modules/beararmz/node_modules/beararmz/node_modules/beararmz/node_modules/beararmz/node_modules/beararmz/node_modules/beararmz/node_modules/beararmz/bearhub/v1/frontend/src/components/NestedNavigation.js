@@ -49,9 +49,11 @@ const NestedNavigation = () => {
     firearms: ["Training Videos", "Safety", "Maintenance", "History", "Ammo"],
     dictionary: [
       "Legal Terms",
-      "Self Defense",
+      "Self Defense Terms",
       "Medical Terms",
-      "Ammunition",
+      "Firearms Terms",
+      "Hunting Terms",
+      "Outdoor Terms",
     ],
     emergency: ["Emergency Response", "Emergency Preparedness"],
   };
@@ -190,31 +192,28 @@ const NestedNavigation = () => {
           )}
         </li>
         <li className={activeCategory === "dictionary" ? "active" : ""}>
-          <Link
-            to="/dictionary"
-            onClick={(e) => {
-              preventDefault(e);
-              handleMainCategoryClick("dictionary");
-            }}
-          >
-            Dictionary
-          </Link>
-          {showSubcategories.dictionary && (
-            <ul className="subcategories">
-              {subcategories.dictionary.map((subcategory, index) => (
-                <li key={index}>
-                  <Link
-                    to={`/dictionary/${subcategory
-                      .toLowerCase()
-                      .replace(/\s/g, "-")}`}
-                  >
-                    {subcategory}
-                  </Link>
+                    <Link
+                        to="/dictionary"
+                        onClick={(e) => {
+                            preventDefault(e);
+                            handleMainCategoryClick("dictionary");
+                        }}
+                    >
+                        Dictionary
+                    </Link>
+                    {showSubcategories.dictionary && (
+                        <ul className="subcategories">
+                            {subcategories.dictionary.map((subcategory, index) => (
+                                <li key={index}>
+                                    {/* Use anchor links to navigate to specific sections within the dictionary page */}
+                                    <Link to={`/dictionary#${subcategory.toLowerCase().replace(/\s/g, "-")}`}>
+                                        {subcategory}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </li>
-              ))}
-            </ul>
-          )}
-        </li>
         <li className={activeCategory === "emergency" ? "active" : ""}>
           <Link
             to="/emergency"

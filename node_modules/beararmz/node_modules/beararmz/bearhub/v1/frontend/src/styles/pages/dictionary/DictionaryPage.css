@@ -1,0 +1,35 @@
+/* DictionaryPage.css */
+
+.dictionary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.dictionary-section {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 40px;
+}
+
+.dictionary-section-heading {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.dictionary-term {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+.dictionary-explanation {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}

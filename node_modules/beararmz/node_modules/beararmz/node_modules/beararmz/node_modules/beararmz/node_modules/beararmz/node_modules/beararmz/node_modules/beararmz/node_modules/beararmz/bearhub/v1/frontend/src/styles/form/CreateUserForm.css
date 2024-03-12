@@ -1,0 +1,24 @@
+/* styles.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form {
+    margin-top: 20px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .textField {
+    margin-bottom: 10px;
+  }
+  
+  .button {
+    margin-top: 10px;
+  }
+  

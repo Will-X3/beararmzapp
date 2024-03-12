@@ -43,7 +43,8 @@ ArticleCard.propTypes = {
   content: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   imageUrl: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
+
 
 export default ArticleCard;
