@@ -1,0 +1,48 @@
+.comment-container {
+    margin-bottom: 20px;
+  }
+  
+  .comment-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .comment-input {
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+  }
+  
+  .comment-submit-button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .comment-submit-button:hover {
+    background-color: #218838;
+  }
+  
+  .comment-close-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .comment-close-button:hover {
+    background-color: #c82333;
+  }
+  

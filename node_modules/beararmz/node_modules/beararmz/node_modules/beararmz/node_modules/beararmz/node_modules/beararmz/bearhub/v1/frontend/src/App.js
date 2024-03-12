@@ -27,6 +27,7 @@ import PersonalDefensePage from "./pages/self-defense/PersonalDefensePage";
 import DictionaryPage from "./pages/dictionary/DictionaryPage";
 import CreateUserForm from "./forms/CreateUserForm";
 import LoginForm from "./forms/LoginForm";
+import CommentButton from "./components/CommentButton";
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState("videos");
@@ -169,6 +170,8 @@ const App = () => {
             )}
           />
           <Route exact path="/slider-view" component={SliderView} />
+          <Route exact path="/comment" component={CommentButton} />
+
         </Switch>
 
         <footer></footer>
