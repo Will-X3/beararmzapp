@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateUserForm = () => {
   const classes = useStyles();
-  const [userData, setUserData] = useState({ name: '', email: '', password: '' });
+  const [userData, setUserData] = useState({ username: '', email: '', password: '' }); // Change name to username
   const [error, setError] = useState('');
 
   const handleUserFormSubmit = async (event) => {
@@ -25,8 +25,8 @@ const CreateUserForm = () => {
     setError('');
 
     // Basic input validation
-    if (!userData.name || !userData.email || !userData.password) {
-      setError('Name, email, and password are required.');
+    if (!userData.username || !userData.email || !userData.password) { // Change name to username
+      setError('Username, email, and password are required.'); // Change name to username
       return;
     }
 
@@ -34,7 +34,7 @@ const CreateUserForm = () => {
       const response = await axios.post('http://localhost:5000/v1/bearhub/users', userData);
       if (response.status === 201) {
         alert('User created successfully');
-        setUserData({ name: '', email: '', password: '' }); // Clear form fields
+        setUserData({ username: '', email: '', password: '' }); // Change name to username
       }
     } catch (error) {
       console.error('Failed to create user', error);
@@ -49,10 +49,10 @@ const CreateUserForm = () => {
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <TextField
           className={classes.textField}
-          label="Name"
+          label="Username" // Change name to username
           variant="outlined"
-          value={userData.name}
-          onChange={(e) => setUserData({ ...userData, name: e.target.value })}
+          value={userData.username} // Change name to username
+          onChange={(e) => setUserData({ ...userData, username: e.target.value })} // Change name to username
           required
         />
         <TextField
