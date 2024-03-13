@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+  Redirect,
+} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import TrendingVideosPage from "./pages/TrendingVideosPage";
 import TrainingVideosPage from "./pages/firearms/TrainingVideosPage";
@@ -31,10 +37,24 @@ import CommentButton from "./components/CommentButton";
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState("videos");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     setCurrentPage(getPageFromPath(window.location.pathname));
   }, []);
+
+  const handleLogin = (token) => {
+    localStorage.setItem("token", token);
+    setIsLoggedIn(true);
+    history.push('/');
+  };
+
+  // Function to handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+  };
 
   const handlePageToggle = () => {
     setCurrentPage((prevPage) =>
@@ -58,8 +78,18 @@ const App = () => {
       <div className="App">
         <Navbar />
         <Switch>
+          <Route exact path="/login">
+            {isLoggedIn ? (
+              <Redirect to="/" />
+            ) : (
+              <LoginForm onLogin={handleLogin} />
+            )}
+          </Route>
+          <Route exact path="/">
+            {isLoggedIn ? <TrendingVideosPage /> : <Redirect to="/login" />}
+          </Route>
+
           <Route exact path="/user" component={CreateUserForm} />
-          <Route exact path="/login" component={LoginForm} />
 
           <Route exact path="/laws" component={LawsByState} />
           <Route exact path="/laws/laws-by-state" component={LawsByState} />
@@ -158,7 +188,6 @@ const App = () => {
           {/* Path for article and video details pages */}
           <Route path="/videos/:videoUrl" component={VideoDetails} />
           <Route path="/article/:articleId" component={ArticleDetails} />
-
           <Route
             exact
             path="/"
@@ -171,7 +200,6 @@ const App = () => {
           />
           <Route exact path="/slider-view" component={SliderView} />
           <Route exact path="/comment" component={CommentButton} />
-
         </Switch>
 
         <footer></footer>
