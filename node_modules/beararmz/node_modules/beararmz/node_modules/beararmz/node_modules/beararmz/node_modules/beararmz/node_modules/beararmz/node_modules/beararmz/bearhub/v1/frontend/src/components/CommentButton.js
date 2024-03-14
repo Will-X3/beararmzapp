@@ -1,64 +1,75 @@
-import React, { useState } from 'react';
-import IconButton from '@mui/material/IconButton';
-import CommentIcon from '@mui/icons-material/Comment';
-import '../styles/CommentButton.css'; // Import the CSS file
+import React, { useState, useContext } from "react";
+import IconButton from "@mui/material/IconButton";
+import CommentIcon from "@mui/icons-material/Comment";
+import "../styles/CommentButton.css";
+import { AuthContext } from "../auth/AuthContext.js";
 
-const CommentComponent = () => {
-    const [expanded, setExpanded] = useState(false);
-    const [comment, setComment] = useState('');
+const CommentButton = () => {
+  const [expanded, setExpanded] = useState(false);
+  const [comment, setComment] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-    const handleButtonClick = () => {
-        setExpanded(!expanded);
-    };
+  const { userId } = useContext(AuthContext); // Access the authenticated user's user ID from context
 
-    const handleInputChange = (e) => {
-        setComment(e.target.value);
-    };
+  const handleButtonClick = () => {
+    setExpanded(!expanded);
+  };
 
-    const handleSubmit = async () => {
-        try {
-            const response = await fetch('http://localhost:5000/v1/bearhub/comment', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ content: comment }), // assuming your API expects the comment content in a 'content' field
-            });
+  const handleInputChange = (e) => {
+    setComment(e.target.value);
+    setError(""); // Clear any previous error when input changes
+  };
 
-            if (!response.ok) {
-                throw new Error('Failed to submit comment');
-            }
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch("http://localhost:5000/v1/bearhub/comment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content: comment, userId: userId }), // Include authenticated user's user ID
+      });
 
-            // Optionally handle success, e.g., show a success message or update UI
-            console.log('Comment submitted successfully');
-            // Clear the input field
-            setComment('');
-            // Collapse the input field
-            setExpanded(false);
-        } catch (error) {
-            console.error('Error submitting comment:', error);
-            // Optionally handle error, e.g., show an error message or update UI
-        }
-    };
+      // Handle response...
+    } catch (error) {
+      console.error("Error submitting comment:", error.message);
+      setError("Failed to submit comment. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    return (
-        <div className="comment-container">
-            <IconButton className="comment-button" onClick={handleButtonClick}>
-                <CommentIcon />
-            </IconButton>
-            {expanded && (
-                <div>
-                    <textarea
-                        className="comment-input"
-                        placeholder="Write your comment..."
-                        value={comment}
-                        onChange={handleInputChange}
-                    />
-                    <button className="comment-submit-button" onClick={handleSubmit}>Submit</button>
-                </div>
-            )}
+  return (
+    <div className="comment-container">
+      <IconButton
+        className="comment-button"
+        onClick={handleButtonClick}
+        disabled={isLoading}
+      >
+        <CommentIcon />
+      </IconButton>
+      {expanded && (
+        <div className="comment-input-container">
+          <textarea
+            className="comment-input"
+            placeholder="Write your comment..."
+            value={comment}
+            onChange={handleInputChange}
+          />
+          <button
+            className="comment-submit-button"
+            onClick={handleSubmit}
+            disabled={isLoading || !comment.trim()}
+          >
+            {isLoading ? "Submitting..." : "Submit"}
+          </button>
+          {error && <p className="comment-error">{error}</p>}
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
-export default CommentComponent;
+export default CommentButton;

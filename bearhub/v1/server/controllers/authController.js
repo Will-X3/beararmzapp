@@ -5,6 +5,9 @@ const User = require('../models/User');
 exports.login = async (req, res) => {
   const { username, password } = req.body;
 
+  const fallbackJWTSecret = 'yourFallbackSecret'; // Replace with your actual fallback secret
+
+
   try {
     // Find user by username
     const user = await User.findOne({ username });
@@ -21,7 +24,7 @@ exports.login = async (req, res) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET || fallbackJWTSecret, { expiresIn: '1h' });
 
     res.status(200).json({ token });
   } catch (error) {

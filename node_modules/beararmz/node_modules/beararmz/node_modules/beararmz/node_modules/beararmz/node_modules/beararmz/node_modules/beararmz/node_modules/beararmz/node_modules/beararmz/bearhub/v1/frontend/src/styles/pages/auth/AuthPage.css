@@ -1,0 +1,26 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .auth-form {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .toggle-form {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
+  .toggle-form span {
+    color: blue;
+    cursor: pointer;
+  }
+  

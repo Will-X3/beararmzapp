@@ -1,18 +1,20 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import ReactPlayer from 'react-player';
-import '../styles/VideoDetails.css';
 import NestedNavigation from './NestedNavigation';
 import CommentButton from "../components/CommentButton";
+import CommentsSection from "../components/CommentsSection"; // Import CommentsSection component
 
 const VideoDetails = () => {
-  // Access the URL parameter containing the video URL
   const { videoUrl } = useParams();
+  const location = useLocation(); // Use useLocation hook to access state passed through Link
 
-  // Render the Video Details page
+  // Access video details and comments from location state
+  const { title, description, comments } = location.state.videoDetails;
+
   return (
     <div className="video-details-container">
-        <NestedNavigation/>
+      <NestedNavigation/>
       <div className="video-player-wrapper">
         <ReactPlayer
           url={decodeURIComponent(videoUrl)}
@@ -23,15 +25,16 @@ const VideoDetails = () => {
         />
       </div>
       <div className="video-info">
-        <h1 className="video-title">Video Title</h1>
-        <p className="video-description">Video Description Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <h1 className="video-title">{title}</h1> {/* Display title from video details */}
+        <p className="video-description">{description}</p> {/* Display description from video details */}
         <div className="video-metadata">
           <span className="metadata-item">Author: John Doe</span>
           <span className="metadata-item">Views: 1000</span>
           <span className="metadata-item">Likes: 500</span>
           <CommentButton />
-
         </div>
+        {/* Render CommentsSection component and pass comments */}
+        <CommentsSection comments={comments} />
       </div>
     </div>
   );

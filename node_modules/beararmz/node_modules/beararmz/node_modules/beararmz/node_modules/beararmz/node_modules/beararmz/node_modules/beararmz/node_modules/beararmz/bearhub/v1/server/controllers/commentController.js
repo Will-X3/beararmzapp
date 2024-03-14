@@ -11,20 +11,45 @@ const getAllComments = async (req, res) => {
 };
 
 const createComment = async (req, res) => {
-  const { content, videoId, articleId, userId } = req.body;
+  const { content, userId, videoId, articleId } = req.body;
   
   try {
     // Basic input validation
-    if (!content || !videoId || !articleId || !userId) {
-      return res.status(400).json({ message: 'Content, videoId, articleId, and userId are required.' });
+    if (!content || !userId) {
+      return res.status(400).json({ message: 'Content and userId are required.' });
     }
 
-    const newComment = new Comment({ content, videoId, articleId, userId });
+    const newComment = new Comment({ content, userId, videoId, articleId });
     await newComment.save();
     return res.status(201).json({ comment: newComment });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Failed to create comment.' });
+  }
+};
+
+
+const getCommentsByVideoId = async (req, res) => {
+  const { videoId } = req.params;
+
+  try {
+    const comments = await Comment.find({ videoId });
+    return res.json(comments);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+const getCommentsByArticleId = async (req, res) => {
+  const { articleId } = req.params;
+
+  try {
+    const comments = await Comment.find({ articleId });
+    return res.json(comments);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
@@ -86,4 +111,6 @@ module.exports = {
   updateComment,
   deleteComment,
   getCommentById,
+  getCommentsByArticleId,
+  getCommentsByVideoId,
 };

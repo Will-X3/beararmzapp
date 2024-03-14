@@ -31,9 +31,9 @@ import NonLethalPage from "./pages/self-defense/NonLethalPage";
 import BasicDefensePage from "./pages/self-defense/BasicDefensePage";
 import PersonalDefensePage from "./pages/self-defense/PersonalDefensePage";
 import DictionaryPage from "./pages/dictionary/DictionaryPage";
-import CreateUserForm from "./forms/CreateUserForm";
-import LoginForm from "./forms/LoginForm";
+import RegistrationForm from "./forms/RegistrationForm";
 import CommentButton from "./components/CommentButton";
+import AuthPage from "./pages/auth/AuthPage";
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState("videos");
@@ -47,10 +47,9 @@ const App = () => {
   const handleLogin = (token) => {
     localStorage.setItem("token", token);
     setIsLoggedIn(true);
-    history.push('/');
+    history.push("/");
   };
 
-  // Function to handle logout
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
@@ -76,21 +75,18 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <Navbar />
+        <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
         <Switch>
-          <Route exact path="/login">
+          <Route exact path="/auth">
             {isLoggedIn ? (
-              <Redirect to="/" />
+              <TrendingVideosPage />
             ) : (
-              <LoginForm onLogin={handleLogin} />
+              <AuthPage onLogin={handleLogin} />
             )}
           </Route>
           <Route exact path="/">
-            {isLoggedIn ? <TrendingVideosPage /> : <Redirect to="/login" />}
+            {isLoggedIn ? <TrendingVideosPage /> : <Redirect to="/auth" />}
           </Route>
-
-          <Route exact path="/user" component={CreateUserForm} />
-
           <Route exact path="/laws" component={LawsByState} />
           <Route exact path="/laws/laws-by-state" component={LawsByState} />
           <Route
@@ -200,8 +196,8 @@ const App = () => {
           />
           <Route exact path="/slider-view" component={SliderView} />
           <Route exact path="/comment" component={CommentButton} />
+          <Route exact path="/user" component={RegistrationForm} />
         </Switch>
-
         <footer></footer>
       </div>
     </Router>

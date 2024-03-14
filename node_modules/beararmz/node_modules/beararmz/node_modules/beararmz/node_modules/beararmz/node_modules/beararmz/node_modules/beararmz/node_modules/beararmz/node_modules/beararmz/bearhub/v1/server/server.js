@@ -1,9 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const {errorHandler} = require('../server/middleware/errorHandler');
+const { errorHandler } = require('../server/middleware/errorHandler');
+require('dotenv').config();
 
-const authRoutes = require('./routes/authRoutes');
+
+const authRoutes = require('./routes/authRoutes'); // Require authRoutes before using it
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -29,20 +31,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(errorHandler);
 
-
 // Authentication Route
 app.use('/auth', authRoutes);
-
-
 
 // Routes
 const articlesRoutes = require('./routes/articlesRoutes');
 const videosRoute = require('./routes/videosRoute');
 const reviewsRoute = require('./routes/reviewsRoute');
-const userRoute = require('./routes/userRoute'); 
+const userRoute = require('./routes/userRoute');
 const categoryRoute = require('./routes/categoryRoute');
-const commentRoute = require('./routes/commentRoute'); 
-
+const commentRoute = require('./routes/commentRoute');
 
 // Use routes
 app.use('/v1/bearhub/articles', articlesRoutes);
@@ -51,8 +49,6 @@ app.use('/v1/bearhub/reviews', reviewsRoute);
 app.use('/v1/bearhub/users', userRoute);
 app.use('/v1/bearhub/categories', categoryRoute);
 app.use('/v1/bearhub/comment', commentRoute);
-
-
 
 // Start server
 app.listen(PORT, () => {

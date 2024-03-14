@@ -16,11 +16,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginForm = () => {
+const LoginForm = ({ onLogin }) => {
   const classes = useStyles();
   const [userData, setUserData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
-  const history = useHistory(); // Initialize useHistory hook
+  const history = useHistory(); 
 
   const handleLoginFormSubmit = async (event) => {
     event.preventDefault();
@@ -41,8 +41,10 @@ const LoginForm = () => {
         const { token, redirectUrl } = response.data;
         // Save token to local storage
         localStorage.setItem("token", token);
+        // Call the onLogin callback with the token
+        onLogin(token);
         // Redirect to default route or specified redirect URL using history
-        history.push(redirectUrl || "/trending-videos"); // Redirect to trending-videos if no redirectUrl is provided
+        history.push(redirectUrl || "/trending-videos");
         // Show success message
         alert("Login successful");
       }

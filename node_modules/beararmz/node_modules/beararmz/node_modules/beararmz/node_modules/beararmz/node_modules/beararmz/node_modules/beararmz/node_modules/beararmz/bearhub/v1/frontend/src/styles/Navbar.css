@@ -1,19 +1,48 @@
-/* Navbar.css */
 .nav {
-  width: 99%; /* Ensure navbar spans the width of the container */
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between; /* Align items to the start and end */
+  padding: 0 20px;
   background-color: #333;
-  color: white;
-  padding: 10px;
+  color: #fff;
 }
 
-.logo {
-  font-size: 1.5rem;
-  margin: 0;
+.logo-container {
+  flex-grow: 1; /* Allow logo to take up remaining space */
+}
+
+.nav-links {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
 }
 
 .drawer-icon {
   cursor: pointer;
+}
+
+.drawer-icon svg {
+  color: #fff;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links li:first-child {
+  margin-left: 0;
+}
+
+.nav-links a,
+.logout-button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none; /* Ensure links have no underline */
+}
+
+.logout-button:focus {
+  outline: none; /* Remove focus outline */
 }

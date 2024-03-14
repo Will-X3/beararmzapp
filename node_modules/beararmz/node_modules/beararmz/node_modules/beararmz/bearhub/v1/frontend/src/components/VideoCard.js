@@ -7,7 +7,7 @@ import '../styles/VideoCard.css'; // Import only VideoCard.css for styling
 import ReactPlayer from 'react-player';
 import { getYouTubeThumbnailUrl } from '../utils';
 
-const VideoCard = ({ title, description, url, category, isSearchResult }) => {
+const VideoCard = ({ title, description, url, category, isSearchResult, comments }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlayClick = () => {
@@ -17,7 +17,7 @@ const VideoCard = ({ title, description, url, category, isSearchResult }) => {
 
 
   return (
-    <Link to={`/videos/${encodeURIComponent(url)}`}> {/* Use Link to wrap the card */}
+    <Link to={{ pathname: `/videos/${encodeURIComponent(url)}`, state: { videoDetails: { title, description, url, comments } } }}> {/* Pass comments as part of state */}
       <Card className="video-card">
         <CardMedia component="img" alt={title} image={getYouTubeThumbnailUrl(url)} />
         <CardContent>

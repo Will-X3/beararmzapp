@@ -1,0 +1,16 @@
+.comments-section {
+    margin-top: 20px;
+  }
+  
+  .comment {
+    margin-bottom: 10px;
+  }
+  
+  .comment-user {
+    font-weight: bold;
+  }
+  
+  .comment-content {
+    margin-left: 10px;
+  }
+  
