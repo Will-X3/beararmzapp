@@ -1,25 +1,52 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Card, CardContent, CardMedia, Typography, IconButton } from '@mui/material';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import { Link } from 'react-router-dom'; // Import Link component
-import '../styles/VideoCard.css'; // Import only VideoCard.css for styling
-import ReactPlayer from 'react-player';
-import { getYouTubeThumbnailUrl } from '../utils';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  IconButton,
+} from "@mui/material";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import { Link } from "react-router-dom";
+import "../styles/VideoCard.css";
+import ReactPlayer from "react-player";
+import { getYouTubeThumbnailUrl } from "../utils";
 
-const VideoCard = ({ title, description, url, category, isSearchResult, comments }) => {
+const VideoCard = ({
+  title,
+  description,
+  url,
+  category,
+  isSearchResult,
+  comments,
+}) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlayClick = () => {
-
     setIsPlaying(!isPlaying);
   };
 
-
   return (
-    <Link to={{ pathname: `/videos/${encodeURIComponent(url)}`, state: { videoDetails: { title, description, url, comments } } }}> {/* Pass comments as part of state */}
+    <Link
+      to={{
+        pathname: `/videos/${encodeURIComponent(url)}`,
+        state: {
+          videoDetails: {
+            title: "Femme Fatale",
+            description: "Nature",
+            url: "https://www.youtube.com/watch?v=SdYpmL25MLw",
+            comments: [], // or comments data if available
+          },
+        },
+      }}
+    >
       <Card className="video-card">
-        <CardMedia component="img" alt={title} image={getYouTubeThumbnailUrl(url)} />
+        <CardMedia
+          component="img"
+          alt={title}
+          image={getYouTubeThumbnailUrl(url)}
+        />
         <CardContent>
           <Typography variant="h6" component="div">
             {title}
@@ -34,7 +61,12 @@ const VideoCard = ({ title, description, url, category, isSearchResult, comments
           )}
         </CardContent>
         {!isPlaying && (
-          <IconButton className="play-button" color="primary" aria-label="play" onClick={handlePlayClick}>
+          <IconButton
+            className="play-button"
+            color="primary"
+            aria-label="play"
+            onClick={handlePlayClick}
+          >
             <PlayArrowIcon />
           </IconButton>
         )}
@@ -46,7 +78,7 @@ const VideoCard = ({ title, description, url, category, isSearchResult, comments
               height="100%"
               controls
               playing={true}
-              style={{ position: 'absolute', top: 0, left: 0 }}
+              style={{ position: "absolute", top: 0, left: 0 }}
             />
           </div>
         )}

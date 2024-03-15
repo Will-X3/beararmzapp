@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const CommentsSection = ({ comments }) => {
-  // Add a check for comments
-  if (!comments || !Array.isArray(comments) || comments.length === 0) {
+  // Check if comments exist and are non-empty
+  if (!comments || !comments.length) {
     return <p>No comments available.</p>;
   }
 
@@ -11,9 +11,10 @@ const CommentsSection = ({ comments }) => {
     <div className="comments-section">
       <h2>Comments</h2>
       <ul>
-        {/* Map through comments if comments exist */}
+        {/* Map through comments */}
         {comments.map((comment, index) => (
           <li key={index}>
+            {/* Render comment content, author, and date */}
             <p>{comment.content}</p>
             <p>Author: {comment.author}</p>
             <p>Date: {comment.createdAt}</p>
@@ -24,6 +25,7 @@ const CommentsSection = ({ comments }) => {
   );
 };
 
+// Prop types validation
 CommentsSection.propTypes = {
   comments: PropTypes.arrayOf(
     PropTypes.shape({

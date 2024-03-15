@@ -50,4 +50,26 @@ router.get('/:commentId', async (req, res) => {
   }
 });
 
+
+// Route to get comments by articleId
+router.get('/:articleId', async (req, res) => {
+  try {
+    await commentController.getCommentsByArticleId(req, res);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error while fetching comments by articleId.' });
+  }
+});
+
+
+// Route to get comments by videoId
+router.get('/:videoId', async (req, res) => {
+  try {
+    await commentController.getCommentsByVideoId(req, res);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error while fetching comments by videoId.' });
+  }
+});
+
 module.exports = router;

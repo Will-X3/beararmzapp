@@ -1,4 +1,5 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext } from "react";
+import mongoose from "mongoose";
 
 // Create the context
 export const AuthContext = createContext();
@@ -10,8 +11,11 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  // Login function
   const login = (userData) => {
+    console.log("Received userData:", userData);
+    console.log("Type of userId:", typeof userData.userId);
+    // Convert userId to ObjectId format
+    userData.userId = mongoose.Types.ObjectId(userData.userId);
     setUser(userData);
   };
 
@@ -27,9 +31,5 @@ export const AuthProvider = ({ children }) => {
     logout,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

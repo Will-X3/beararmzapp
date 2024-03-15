@@ -37,9 +37,10 @@ const getCommentsByVideoId = async (req, res) => {
     return res.json(comments);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
 
 const getCommentsByArticleId = async (req, res) => {
   const { articleId } = req.params;
