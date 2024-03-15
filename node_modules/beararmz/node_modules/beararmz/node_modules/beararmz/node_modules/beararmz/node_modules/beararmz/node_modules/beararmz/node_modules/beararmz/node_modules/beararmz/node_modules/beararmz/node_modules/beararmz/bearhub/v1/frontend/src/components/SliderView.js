@@ -12,13 +12,18 @@ const SliderView = () => {
         const response = await axios.get(
           "http://localhost:5000/v1/bearhub/videos"
         );
-        setVideos(response.data);
+        // Extract videoId from the URL and add it to each video object
+        const updatedVideos = response.data.map(video => ({
+          ...video,
+          videoId: extractVideoId(video.url)
+        }));
+        setVideos(updatedVideos);
       } catch (error) {
         console.error("Error fetching videos:", error);
       }
     };
 
-    fetchVideos();
+    fetchVideos(); // Fetch videos when the component mounts
   }, []);
 
   const handlePrev = () => {
@@ -33,7 +38,10 @@ const SliderView = () => {
     );
   };
 
-
+  const extractVideoId = (url) => {
+    const videoIdMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/);
+    return videoIdMatch && videoIdMatch[1];
+  };
 
   return (
     <div className="slider-wrapper">
