@@ -5,7 +5,7 @@ const User = require('../models/User');
 exports.login = async (req, res) => {
   const { username, password } = req.body;
 
-  const fallbackJWTSecret = 'yourFallbackSecret'; // Replace with your actual fallback secret
+  const fallbackJWTSecret = 'yourFallbackSecret'; // Investigate why this needs to be used.
 
 
   try {
