@@ -23,7 +23,8 @@ const VideoCard = ({
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const handlePlayClick = () => {
+  const handlePlayClick = (e) => {
+    e.preventDefault(); // Prevent the default behavior of the link
     setIsPlaying(!isPlaying);
   };
 
@@ -40,6 +41,7 @@ const VideoCard = ({
           },
         },
       }}
+      className="video-card-link"
     >
       <Card className="video-card">
         <CardMedia
@@ -68,7 +70,7 @@ const VideoCard = ({
             onClick={handlePlayClick}
           >
             <PlayArrowIcon />
-          </IconButton>
+          </IconButton >
         )}
         {isPlaying && (
           <div className="react-player-wrapper">

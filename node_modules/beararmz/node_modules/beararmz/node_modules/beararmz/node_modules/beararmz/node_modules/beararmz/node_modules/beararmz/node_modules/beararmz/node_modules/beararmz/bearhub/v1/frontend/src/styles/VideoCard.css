@@ -1,7 +1,7 @@
 .video-card {
   position: relative;
   margin: 10px;
-  width: calc(33.33% - 20px);
+  width: 400px;
   box-sizing: border-box;
   display: inline-block;
   overflow: hidden;

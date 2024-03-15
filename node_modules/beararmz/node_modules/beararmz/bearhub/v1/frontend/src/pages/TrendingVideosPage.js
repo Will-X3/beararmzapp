@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NestedNavigation from "../components/NestedNavigation";
 import SearchBar from "../components/SearchBar";
-import { ListViewContainer } from "../styles/ListViewStyles";
 import SliderView from "../components/SliderView";
 import ToggleButton from "../components/ToggleButton";
 import ListView from "../components/ListView";
@@ -74,13 +73,11 @@ const TrendingVideosPage = React.memo(({ currentPage, onPageToggle }) => {
       <ToggleButton currentPage="videos" onPageToggle={() => {}} />
       <div className="video-list">
         <h1>Trending Videos</h1>
-        <ListViewContainer>
           {filteredVideos.length > 0 ? (
             <ListView type="videos" items={filteredVideos} />
           ) : (
             <p>No videos found.</p>
           )}
-        </ListViewContainer>
       </div>
     </div>
   );

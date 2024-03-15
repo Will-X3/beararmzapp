@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NestedNavigation from "../components/NestedNavigation";
 import SearchBar from "../components/SearchBar";
-import { ListViewContainer } from "../styles/ListViewStyles";
 import SliderView from "../components/SliderView";
 import ToggleButton from "../components/ToggleButton";
 import axios from "axios";
@@ -66,7 +65,6 @@ const TrendingArticlesPage = React.memo(({ currentPage, onPageToggle }) => {
       <ToggleButton currentPage="articles" onPageToggle={() => {}} />
       <div className="article-list">
         <h1>Trending Articles</h1>
-        <ListViewContainer>
           {filteredArticles.length > 0 ? (
             <ListView
               type="articles"
@@ -76,7 +74,6 @@ const TrendingArticlesPage = React.memo(({ currentPage, onPageToggle }) => {
           ) : (
             <p>No articles found.</p>
           )}
-        </ListViewContainer>
       </div>
       {/* Pass the selected article to the ArticleDetails component */}
     </div>

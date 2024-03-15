@@ -1,18 +1,16 @@
-// ListView.js
-
 import React from 'react';
-import '../styles/ListView.css'; // Import the CSS file
+import '../styles/ListView.css'; // Import the external CSS file
 import VideoCard from './VideoCard';
 import LegalCard from './LegalCard';
 import ArticleCard from './ArticleCard';
 
-const ListView = ({ type, items, onSelect }) => { // Added onSelect prop
-  const handleItemClick = (item) => { // Added function to handle item clicks
-    onSelect(item); // Invoke the onSelect callback with the clicked item
+const ListView = ({ type, items, onSelect }) => {
+  const handleItemClick = (item) => {
+    onSelect(item);
   };
 
   return (
-    <div className="listViewContainer"> {/* Update className */}
+    <div className="listViewContainer">
       {items.map((item) => {
         if (type === 'videos') {
           return (
@@ -23,7 +21,7 @@ const ListView = ({ type, items, onSelect }) => { // Added onSelect prop
               category={item.category}
               url={item.url}
               isSearchResult={true}
-              onClick={() => handleItemClick(item)} // Handle click for video card
+              onClick={() => handleItemClick(item)}
             />
           );
         } else if (type === 'legal') {
@@ -34,7 +32,7 @@ const ListView = ({ type, items, onSelect }) => { // Added onSelect prop
               description={item.description}
               category={item.category}
               imageUrl={item.imageUrl}
-              onClick={() => handleItemClick(item)} // Handle click for legal card
+              onClick={() => handleItemClick(item)}
             />
           );
         } else if (type === 'articles') {
@@ -46,7 +44,7 @@ const ListView = ({ type, items, onSelect }) => { // Added onSelect prop
               content={item.content}
               category={item.category}
               isSearchResult={true}
-              onClick={() => handleItemClick(item)} // Handle click for article card
+              onClick={() => handleItemClick(item)}
             />
           );
         }

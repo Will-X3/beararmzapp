@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import NestedNavigation from '../../components/NestedNavigation';
-import { ListViewContainer } from '../../styles/ListViewStyles';
 import SearchBar from '../../components/SearchBar';
 import ListView from '../../components/ListView';
 import '../../styles/LegalUpdates.css'
@@ -20,13 +19,11 @@ const LegalUpdatesPage = () => {
         <SearchBar onSearch={handleSearch} placeholder="Search legal updates" /> {/* Use setSearchInput in SearchBar */}
         <div className="legal-updates-list">
           <h1>Legal Updates</h1>
-          <ListViewContainer>
             {dummyVideos.length > 0 ? (
               <ListView type="videos" items={dummyVideos} />
             ) : (
               <p>No legal updates found.</p>
             )}
-          </ListViewContainer>
         </div>
       </div>
     );

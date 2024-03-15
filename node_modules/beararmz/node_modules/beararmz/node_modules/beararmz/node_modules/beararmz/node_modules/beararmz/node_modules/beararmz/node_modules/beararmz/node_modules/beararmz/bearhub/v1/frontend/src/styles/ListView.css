@@ -1,11 +1,16 @@
 /* ListView.css */
 
 .listViewContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px; /* Adjust spacing between items */
-  }
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  padding-left: 5%;
+}
+
+/* Add more styles as needed */
+
   
   .listViewContainer > * {
     flex-basis: calc(33.33% - 13.33px); /* Adjust width for spacing */
