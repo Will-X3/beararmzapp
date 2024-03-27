@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const { errorHandler } = require('../server/middleware/errorHandler');
+const authController = require('../server/controllers/authController')
 require('dotenv').config();
 
 
@@ -31,8 +32,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(errorHandler);
 
+
+// Import and use the session middleware
+app.use(authController.sessionMiddleware);
+
 // Authentication Route
 app.use('/auth', authRoutes);
+
+
 
 // Routes
 const articlesRoutes = require('./routes/articlesRoutes');

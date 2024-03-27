@@ -1,12 +1,10 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const session = require('express-session'); // Import express-session middleware
 
 exports.login = async (req, res) => {
   const { username, password } = req.body;
-
-  const fallbackJWTSecret = 'yourFallbackSecret'; // Investigate why this needs to be used.
-
 
   try {
     // Find user by username
@@ -23,8 +21,11 @@ exports.login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid password' });
     }
 
+    // Set session data
+    req.session.userId = user._id;
+
     // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET || fallbackJWTSecret, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     res.status(200).json({ token });
   } catch (error) {
@@ -32,3 +33,10 @@ exports.login = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+// Export the session middleware configuration
+exports.sessionMiddleware = session({
+  secret: 'beararmzkey', // Replace with a random string for session encryption
+  resave: false,
+  saveUninitialized: true
+});

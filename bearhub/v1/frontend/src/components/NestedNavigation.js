@@ -45,6 +45,9 @@ const NestedNavigation = () => {
       "Non-Lethal",
       "Personal Defense",
       "Basic Defense",
+      "Physical Fitness",
+      "Home Defense",
+      "De-Escalation",
     ],
     firearms: ["Training Videos", "Safety", "Maintenance", "History", "Ammo"],
     dictionary: [

@@ -4,26 +4,30 @@ import '../styles/Navbar.css';
 import Drawer from './Drawer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from '../auth/AuthContext'; // Import the useAuth hook
 
-const Navbar = ({ isLoggedIn, onLogout }) => {
+const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const history = useHistory();
+  const { user, logout } = useAuth(); // Use the useAuth hook to access authentication state and logout function
 
   useEffect(() => {
-    // Perform any side effects or updates based on the value of isLoggedIn here
-    // For example, you can trigger some action when the authentication status changes
-  }, [isLoggedIn]);
-  
+    console.log("User:", user);
+  }, [user]);
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
 
   const handleLogout = () => {
+    console.log("Logging out...");
     localStorage.removeItem('token');
-    onLogout(); // Notify parent component of logout
+    logout(); // Use the logout function from the useAuth hook
+    console.log("Logged out successfully.");
     history.push('/auth');
   };
+
+  console.log("Rendering Navbar. User:", user);
 
   return (
     <nav className="nav">
@@ -35,7 +39,7 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
       </div>
       <Drawer isOpen={drawerOpen} onClose={toggleDrawer} />
       <ul className="nav-links">
-        {isLoggedIn ? (
+        {user ? (
           <li>
             <button className="logout-button" onClick={handleLogout}>Logout</button>
           </li>
