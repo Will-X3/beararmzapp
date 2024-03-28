@@ -4,12 +4,16 @@ import '../styles/Navbar.css';
 import Drawer from './Drawer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { useAuth } from '../auth/AuthContext'; // Import the useAuth hook
+import { useDispatch, useSelector } from 'react-redux'; // Import useDispatch and useSelector
+import { logout } from '../slices/authSlice'; // Import the logout action from the authSlice
 
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const history = useHistory();
-  const { user, logout } = useAuth(); // Use the useAuth hook to access authentication state and logout function
+  const dispatch = useDispatch(); // Get the dispatch function
+
+  // Access user data from Redux store
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     console.log("User:", user);
@@ -22,7 +26,7 @@ const Navbar = () => {
   const handleLogout = () => {
     console.log("Logging out...");
     localStorage.removeItem('token');
-    logout(); // Use the logout function from the useAuth hook
+    dispatch(logout()); // Dispatch the logout action
     console.log("Logged out successfully.");
     history.push('/auth');
   };

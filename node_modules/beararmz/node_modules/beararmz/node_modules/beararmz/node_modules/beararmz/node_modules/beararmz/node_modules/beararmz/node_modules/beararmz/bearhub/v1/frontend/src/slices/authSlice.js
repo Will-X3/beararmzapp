@@ -17,7 +17,10 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.error = null;
+      // Clear user data from local storage upon logout
+      localStorage.removeItem('user');
     },
+    
   },
 });
 

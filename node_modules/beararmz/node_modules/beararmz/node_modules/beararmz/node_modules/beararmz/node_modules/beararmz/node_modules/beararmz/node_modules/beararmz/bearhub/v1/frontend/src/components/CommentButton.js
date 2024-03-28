@@ -1,18 +1,19 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import CommentIcon from "@mui/icons-material/Comment";
 import "../styles/CommentButton.css";
-import { AuthContext } from "../auth/AuthContext";
-import axios from "axios";
-import mongoose from "mongoose";
+import { useDispatch, useSelector } from "react-redux";
+import { submitComment } from "../slices/commentSlice"; // Import the submitComment action from your comment slice
 
 const CommentButton = ({ contentType, contentId }) => {
   const [expanded, setExpanded] = useState(false);
   const [comment, setComment] = useState("");
-  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { user } = useContext(AuthContext); // Access the authenticated user's data from context
+  const dispatch = useDispatch(); // Get the dispatch function
+
+  // Access user data from Redux store
+  const user = useSelector((state) => state.auth.user);
 
   const handleButtonClick = () => {
     setExpanded(!expanded);
@@ -20,43 +21,34 @@ const CommentButton = ({ contentType, contentId }) => {
 
   const handleInputChange = (e) => {
     setComment(e.target.value);
-    setError(""); // Clear any previous error when input changes
   };
 
   const handleSubmit = async () => {
     try {
+      console.log("Submitting comment:", comment);
+      console.log("User:", user);
       setIsLoading(true);
-
-      // Check if user data is available
-      if (!user || !user._id) {
-        throw new Error("User is not authenticated or user data is missing.");
+  
+      // Check if user is authenticated
+      if (!user) {
+        throw new Error("User is not authenticated."); // Throw error if user is not authenticated
       }
-
-      // Ensure userId is in the correct format
-      const userIdWithoutExtraChars = user._id.replace(/\+$/, ""); // Remove extra characters, if any
-      const convertedUserId = mongoose.Types.ObjectId(userIdWithoutExtraChars); // Convert userId to ObjectId format
-
-      let commentEndpoint = "";
-      if (contentType === "article") {
-        commentEndpoint = `http://localhost:5000/v1/bearhub/comment/${contentId}/article`;
-      } else if (contentType === "video") {
-        commentEndpoint = `http://localhost:5000/v1/bearhub/comment/${contentId}/video`;
-      }
-
-      const response = await axios.post(commentEndpoint, {
-        content: comment,
-        userId: convertedUserId, // Include converted userId in the request payload
-      });
-      // Handle response...
-      console.log("Comment submitted:", response.data);
-      setComment(""); // Clear the comment input after successful submission
+  
+      // Assuming the first user object in the array is the logged-in user
+      const loggedInUser = user[0]; // Accessing the first user object in the array
+  
+      // Dispatch the submitComment action with comment data and user ID
+      dispatch(submitComment({ contentType, contentId, comment, userId: loggedInUser._id }));
+  
+      // Clear the comment input after submission
+      setComment("");
     } catch (error) {
       console.error("Error submitting comment:", error.message);
-      setError("Failed to submit comment. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   return (
     <div className="comment-container">
@@ -82,7 +74,6 @@ const CommentButton = ({ contentType, contentId }) => {
           >
             {isLoading ? "Submitting..." : "Submit"}
           </button>
-          {error && <p className="comment-error">{error}</p>}
         </div>
       )}
     </div>
